@@ -39,6 +39,11 @@ namespace WinFormsApp
 
                 // 3. 绑定结果到DataGridView
                 StudentDataGridView.DataSource = students.ToList();
+                // 如果需要，可以设置DataGridView的列标题等属性
+                StudentDataGridView.Columns["sid"].HeaderText = "学生ID";
+                StudentDataGridView.Columns["sname"].HeaderText = "学生姓名";
+                StudentDataGridView.Columns["sage"].HeaderText = "出生年月";
+                StudentDataGridView.Columns["ssex"].HeaderText = "性别";
 
                 // (可选) 提示查询结果数量
                 MessageBox.Show($"查询到 {students.Count()} 条记录。", "查询完成");
