@@ -9,8 +9,8 @@ namespace WinFormsApp.Services.Interface
 {
     public interface IStudentService
     {
-         Task<IEnumerable<Student>> GetAllStudents();
         Task<Student> GetStudentByIdAsync(string id);
         Task<IEnumerable<Student>> SearchStudentsAsync(Student criteria);
+        Task<bool> InsertStudentAsync(Student student);
     }
 }

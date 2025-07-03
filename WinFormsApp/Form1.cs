@@ -29,7 +29,7 @@ namespace WinFormsApp
                 sname = StudentNametextBox.Text.Trim(),
                 // 假设日期控件为DateTimePicker，性别为ComboBox
                 // 如果控件未启用或未选择，则条件为null
-                sage = StduentBirthdaytextBox.Enabled && DateTime.TryParse(StduentBirthdaytextBox.Text, out var date) ? date : (DateTime?)null,
+                sage = StduentBirthdaytextBox.Enabled && DateTime.TryParse(StduentBirthdaytextBox.Text.Trim(), out var date) ? date : (DateTime?)null,
                 ssex = StudnetGendertextBox.Text.Trim()
             };
             try

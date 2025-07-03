@@ -21,21 +21,6 @@ namespace WinFormsApp.DataAccess
         /// <returns>学生列表</returns>
         /// 
 
-        public async Task<IEnumerable<Student>> GetAll()
-        {
-            // 'using' 语句确保数据库连接在使用完毕后会被自动关闭和释放，即使发生错误
-            using (var connection = DbConnectionFactory.GetConnection())
-            {
-                // 定义要执行的SQL查询语句
-                string sql = "SELECT sid, sname, sage, ssex FROM student";
-
-                // 使用Dapper的Query<T>方法执行查询
-                // Dapper会自动将查询结果的每一行映射到一个Student对象中
-                // 并返回一个Student对象的集合
-                var students =  await connection.QueryAsync<Student>(sql);
-                return students;
-            }
-        }
 
         public async Task<Student> GetByIdAsync(string id)
         {
@@ -50,6 +35,18 @@ namespace WinFormsApp.DataAccess
                 var student = await connection.QueryFirstOrDefaultAsync<Student>(sql, new { Id = id });
                 return student;
             }
+        }
+
+        public  async Task<bool> InsertAsync(Student student)
+        {
+            using (var connection = DbConnectionFactory.GetConnection())
+            {
+                string sql = "INSERT INTO Student(sid, sname, sage, ssex) VALUES(@sid, @sname, @sage, @ssex)";
+                var affectedRows = await connection.ExecuteAsync(sql, student);
+                return affectedRows > 0;
+
+            }
+           
         }
 
         public async Task<IEnumerable<Student>> SearchAsync(Student criteria)

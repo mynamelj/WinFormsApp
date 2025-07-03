@@ -24,16 +24,11 @@ namespace WinFormsApp.Services
             _studentRepository = studentRepository;
         }
 
+
         /// <summary>
         /// 获取所有学生的业务方法
         /// </summary>
         /// <returns>学生列表</returns>
-        public async Task<IEnumerable<Student>> GetAllStudents()
-        {
-            // 目前，这个方法只是简单地调用仓库方法
-            // 未来可以在这里添加业务逻辑，比如数据验证、过滤、组合等
-            return await _studentRepository.GetAll();
-        }
 
         public async Task<Student> GetStudentByIdAsync(string id)
         {
@@ -43,6 +38,11 @@ namespace WinFormsApp.Services
                 return null;
             }
             return await _studentRepository.GetByIdAsync(id);
+        }
+
+        public async Task<bool> InsertStudentAsync(Student student)
+        {
+            return await _studentRepository.InsertAsync(student);
         }
 
         public  async  Task<IEnumerable<Student>> SearchStudentsAsync(Student criteria)
