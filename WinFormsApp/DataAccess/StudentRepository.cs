@@ -7,8 +7,6 @@ using System.Text;
 using System.Threading.Tasks;
 using WinFormsApp.DataAccess.Inerface;
 using WinFormsApp.Models;
-using System.Data.Common; // 添加此命名空间以支持异步事务操作
-using System.Data; // 确保引入了System.Data命名空间
 namespace WinFormsApp.DataAccess
 {
     /// <summary>
@@ -16,6 +14,16 @@ namespace WinFormsApp.DataAccess
     /// </summary>
     public class StudentRepository: IStudentRepository
     {
+        public async Task<bool> DeleteAsync(string id)
+        {
+            using (var connection = DbConnectionFactory.GetConnection())
+            {
+                string sql = "DELETE FROM Student WHERE sid = @Id";
+                var affectedRows = await connection.ExecuteAsync(sql, new { Id = id }); 
+                return affectedRows > 0;
+            }
+        }
+
         /// <summary>
         /// 从数据库中获取所有学生的信息
         /// </summary>
@@ -42,12 +50,11 @@ namespace WinFormsApp.DataAccess
         {
             using (var connection = DbConnectionFactory.GetConnection())
             {
-                string sql = "INSERT INTO Student(sid, sname, sage, ssex) VALUES(@sid, @sname, @sage, @ssex)";
+                string sql = "INSERT INTO Student( sname, sage, ssex) VALUES( @sname, @sage, @ssex)";
                 var affectedRows = await connection.ExecuteAsync(sql, student);
                 return affectedRows > 0;
 
             }
-           
         }
 
         public async Task<IEnumerable<Student>> SearchAsync(Student criteria)
@@ -123,6 +130,43 @@ namespace WinFormsApp.DataAccess
                     {
                         transaction.Rollback(); // 使用同步 Rollback 方法
                         throw; // 重新抛出异常
+                    }
+                }
+            }
+        }
+        public async Task<bool> SaveChangesAsync(IEnumerable<Student> studentsToInsert, IEnumerable<Student> studentsToUpdate)
+        {
+            using (var connection = DbConnectionFactory.GetConnection())
+            {
+                using (var transaction =  connection.BeginTransaction())
+                {
+                    try
+                    {
+                        // 定义插入和更新的SQL语句
+                        string insertSql = "INSERT INTO Student(sname, sage, ssex) VALUES(@sname, @sage, @ssex)";
+                        string updateSql = "UPDATE Student SET sname = @sname, sage = @sage, ssex = @ssex WHERE sid = @sid";
+
+                        // 1. 批量执行插入操作
+                        if (studentsToInsert != null && studentsToInsert.Any())
+                        {
+                            await connection.ExecuteAsync(insertSql, studentsToInsert, transaction);
+                        }
+
+                        // 2. 批量执行更新操作
+                        if (studentsToUpdate != null && studentsToUpdate.Any())
+                        {
+                            await connection.ExecuteAsync(updateSql, studentsToUpdate, transaction);
+                        }
+
+                        // 3. 如果所有操作都成功，提交事务
+                         transaction.Commit();
+                        return true;
+                    }
+                    catch (Exception)
+                    {
+                        // 4. 如果任何一个操作失败，回滚整个事务
+                        transaction.Rollback();
+                        throw; // 向上抛出异常，让上层知道操作失败了
                     }
                 }
             }

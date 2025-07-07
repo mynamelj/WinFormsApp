@@ -30,17 +30,15 @@
         {
             tableLayoutPanel1 = new TableLayoutPanel();
             tableLayoutPanel2 = new TableLayoutPanel();
-            StudentIdtextBox = new TextBox();
-            StudentIdlable = new Label();
-            StudentGendertextBox = new TextBox();
             StudentBirthdaytextBox = new TextBox();
             StudentNamelabel = new Label();
             StudentBirthdaylabel = new Label();
-            StudentGenderlable = new Label();
             StudentNametextBox = new TextBox();
             flowLayoutPanel1 = new FlowLayoutPanel();
             Confirm = new Button();
             取消 = new Button();
+            StudentGenderlable = new Label();
+            StudentGendertextBox = new TextBox();
             tableLayoutPanel1.SuspendLayout();
             tableLayoutPanel2.SuspendLayout();
             flowLayoutPanel1.SuspendLayout();
@@ -65,51 +63,24 @@
             tableLayoutPanel2.ColumnCount = 2;
             tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
             tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 75F));
-            tableLayoutPanel2.Controls.Add(StudentIdtextBox, 1, 0);
-            tableLayoutPanel2.Controls.Add(StudentIdlable, 0, 0);
-            tableLayoutPanel2.Controls.Add(StudentGendertextBox, 1, 3);
-            tableLayoutPanel2.Controls.Add(StudentBirthdaytextBox, 1, 2);
-            tableLayoutPanel2.Controls.Add(StudentNamelabel, 0, 1);
-            tableLayoutPanel2.Controls.Add(StudentBirthdaylabel, 0, 2);
-            tableLayoutPanel2.Controls.Add(StudentGenderlable, 0, 3);
-            tableLayoutPanel2.Controls.Add(StudentNametextBox, 1, 1);
+            tableLayoutPanel2.Controls.Add(StudentNamelabel, 0, 0);
+            tableLayoutPanel2.Controls.Add(StudentNametextBox, 1, 0);
+            tableLayoutPanel2.Controls.Add(StudentBirthdaylabel, 0, 1);
+            tableLayoutPanel2.Controls.Add(StudentBirthdaytextBox, 1, 1);
+            tableLayoutPanel2.Controls.Add(StudentGenderlable, 0, 2);
+            tableLayoutPanel2.Controls.Add(StudentGendertextBox, 1, 2);
             tableLayoutPanel2.Location = new Point(3, 3);
             tableLayoutPanel2.Name = "tableLayoutPanel2";
-            tableLayoutPanel2.RowCount = 4;
-            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            tableLayoutPanel2.RowCount = 3;
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
             tableLayoutPanel2.Size = new Size(357, 170);
             tableLayoutPanel2.TabIndex = 0;
             // 
-            // StudentIdtextBox
-            // 
-            StudentIdtextBox.Location = new Point(92, 3);
-            StudentIdtextBox.Name = "StudentIdtextBox";
-            StudentIdtextBox.Size = new Size(121, 23);
-            StudentIdtextBox.TabIndex = 7;
-            // 
-            // StudentIdlable
-            // 
-            StudentIdlable.AutoSize = true;
-            StudentIdlable.BackColor = Color.Lavender;
-            StudentIdlable.Location = new Point(3, 0);
-            StudentIdlable.Name = "StudentIdlable";
-            StudentIdlable.Size = new Size(21, 17);
-            StudentIdlable.TabIndex = 6;
-            StudentIdlable.Text = "ID";
-            // 
-            // StudentGendertextBox
-            // 
-            StudentGendertextBox.Location = new Point(92, 129);
-            StudentGendertextBox.Name = "StudentGendertextBox";
-            StudentGendertextBox.Size = new Size(121, 23);
-            StudentGendertextBox.TabIndex = 5;
-            // 
             // StudentBirthdaytextBox
             // 
-            StudentBirthdaytextBox.Location = new Point(92, 87);
+            StudentBirthdaytextBox.Location = new Point(92, 59);
             StudentBirthdaytextBox.Name = "StudentBirthdaytextBox";
             StudentBirthdaytextBox.Size = new Size(121, 23);
             StudentBirthdaytextBox.TabIndex = 4;
@@ -117,7 +88,7 @@
             // StudentNamelabel
             // 
             StudentNamelabel.AutoSize = true;
-            StudentNamelabel.Location = new Point(3, 42);
+            StudentNamelabel.Location = new Point(3, 0);
             StudentNamelabel.Name = "StudentNamelabel";
             StudentNamelabel.Size = new Size(32, 17);
             StudentNamelabel.TabIndex = 0;
@@ -126,24 +97,15 @@
             // StudentBirthdaylabel
             // 
             StudentBirthdaylabel.AutoSize = true;
-            StudentBirthdaylabel.Location = new Point(3, 84);
+            StudentBirthdaylabel.Location = new Point(3, 56);
             StudentBirthdaylabel.Name = "StudentBirthdaylabel";
             StudentBirthdaylabel.Size = new Size(56, 17);
             StudentBirthdaylabel.TabIndex = 1;
             StudentBirthdaylabel.Text = "出生年月";
             // 
-            // StudentGenderlable
-            // 
-            StudentGenderlable.AutoSize = true;
-            StudentGenderlable.Location = new Point(3, 126);
-            StudentGenderlable.Name = "StudentGenderlable";
-            StudentGenderlable.Size = new Size(32, 17);
-            StudentGenderlable.TabIndex = 2;
-            StudentGenderlable.Text = "性别";
-            // 
             // StudentNametextBox
             // 
-            StudentNametextBox.Location = new Point(92, 45);
+            StudentNametextBox.Location = new Point(92, 3);
             StudentNametextBox.Name = "StudentNametextBox";
             StudentNametextBox.Size = new Size(121, 23);
             StudentNametextBox.TabIndex = 3;
@@ -183,11 +145,27 @@
             取消.Text = "取消";
             取消.UseVisualStyleBackColor = true;
             // 
+            // StudentGenderlable
+            // 
+            StudentGenderlable.AutoSize = true;
+            StudentGenderlable.Location = new Point(3, 112);
+            StudentGenderlable.Name = "StudentGenderlable";
+            StudentGenderlable.Size = new Size(32, 17);
+            StudentGenderlable.TabIndex = 2;
+            StudentGenderlable.Text = "性别";
+            // 
+            // StudentGendertextBox
+            // 
+            StudentGendertextBox.Location = new Point(92, 115);
+            StudentGendertextBox.Name = "StudentGendertextBox";
+            StudentGendertextBox.Size = new Size(121, 23);
+            StudentGendertextBox.TabIndex = 5;
+            // 
             // AddStudentWindow
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(365, 241);
+            ClientSize = new Size(365, 240);
             Controls.Add(tableLayoutPanel1);
             Name = "AddStudentWindow";
             Text = "AddStudentWindow";
@@ -207,11 +185,9 @@
         private Button 取消;
         private Label StudentNamelabel;
         private Label StudentBirthdaylabel;
-        private Label StudentGenderlable;
-        private TextBox StudentGendertextBox;
         private TextBox StudentBirthdaytextBox;
         private TextBox StudentNametextBox;
-        private TextBox StudentIdtextBox;
-        private Label StudentIdlable;
+        private Label StudentGenderlable;
+        private TextBox StudentGendertextBox;
     }
 }

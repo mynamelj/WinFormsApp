@@ -13,5 +13,7 @@ namespace WinFormsApp.DataAccess.Inerface
         Task<IEnumerable<Student>> SearchAsync(Student criteria);
         Task<bool> InsertAsync(Student student); // 插入新学生
         Task<bool> UpdateAsync(HashSet<Student> students);
+        Task<bool> DeleteAsync(string id);
+        Task<bool> SaveChangesAsync(IEnumerable<Student> studentsToInsert, IEnumerable<Student> studentsToUpdate);
     }
 }

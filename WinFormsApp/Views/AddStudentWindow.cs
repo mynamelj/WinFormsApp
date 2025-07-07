@@ -27,13 +27,13 @@ namespace WinFormsApp.Views
 
         private async void Confirm_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(StudentIdtextBox.Text.Trim()) || !int.TryParse(StudentIdtextBox.Text.Trim(), out _))
-            {
-                MessageBox.Show("请输入有效的ID", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
+            //if (string.IsNullOrWhiteSpace(StudentIdtextBox.Text.Trim()) || !int.TryParse(StudentIdtextBox.Text.Trim(), out _))
+            //{
+            //    MessageBox.Show("请输入有效的ID", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //    return;
+            //}
             //验证日期格式
-            if (string.IsNullOrWhiteSpace(this.StudentNametextBox.Text.Trim()) || !DateTime.TryParse(StudentNametextBox.Text.Trim(), out _))
+            if (string.IsNullOrWhiteSpace(this.StudentBirthdaytextBox.Text.Trim()) || !DateTime.TryParse(StudentBirthdaytextBox.Text.Trim(), out _))
             {
                 MessageBox.Show("请输入有效的出生日期", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -52,12 +52,11 @@ namespace WinFormsApp.Views
             }
              Student student = new Student
             {
-                sid = StudentIdtextBox.Text.Trim(),
+
                 sname = StudentNametextBox.Text.Trim(),
                 sage = DateTime.Parse(StudentBirthdaytextBox.Text.Trim()),
                 ssex = StudentGendertextBox.Text.Trim()
             };
-
             try
             {
                 bool success = await _studentService.InsertStudentAsync(student);
@@ -65,7 +64,6 @@ namespace WinFormsApp.Views
                 {
                     MessageBox.Show("学生信息添加成功。", "成功", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     // 清空输入框
-                    StudentIdtextBox.Clear();
                     StudentNametextBox.Clear();
                     StudentGendertextBox.Clear();
                     StudentBirthdaytextBox.Clear();

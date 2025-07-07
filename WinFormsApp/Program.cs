@@ -21,6 +21,8 @@ namespace WinFormsApp
             // 我们使用 AddTransient，表示每次请求时都创建一个新的实例
             services.AddTransient<IStudentRepository, StudentRepository>();
             services.AddTransient<IStudentService, StudentService>();
+            services.AddTransient<ICourseService, CourseService>();
+            services.AddTransient<ICourseRepository, CourseRepository>();
 
             // 把窗体本身也注册进去，这样DI容器才能创建它
             services.AddTransient<Form1>();

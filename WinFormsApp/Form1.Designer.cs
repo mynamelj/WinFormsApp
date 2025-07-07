@@ -36,14 +36,14 @@
             CourseIdlable = new Label();
             CourseNamelabel = new Label();
             TeacherIdlable = new Label();
-            textBox13 = new TextBox();
-            textBox14 = new TextBox();
-            textBox15 = new TextBox();
+            CourseIdtextBox = new TextBox();
+            CourseNametextBox = new TextBox();
+            TeacherIdtextBox = new TextBox();
             flowLayoutPanel9 = new FlowLayoutPanel();
-            button13 = new Button();
-            button14 = new Button();
-            button15 = new Button();
-            button16 = new Button();
+            CourseAddBtn = new Button();
+            CourseUpdateBtn = new Button();
+            CourseDeleteBtn = new Button();
+            CourseQueryBtn = new Button();
             CoursedataGridView = new DataGridView();
             flowLayoutPanel10 = new FlowLayoutPanel();
             label21 = new Label();
@@ -109,7 +109,7 @@
             StudentGendertextBox = new TextBox();
             flowLayoutPanel1 = new FlowLayoutPanel();
             StudentAddBtn = new Button();
-            UpdateStudentBtn = new Button();
+            StudentUpdateBtn = new Button();
             StudentDeleteBtn = new Button();
             StudentQueryBtn = new Button();
             StudentDataGridView = new DataGridView();
@@ -226,7 +226,6 @@
             CourseflowLayoutPanel.Name = "CourseflowLayoutPanel";
             CourseflowLayoutPanel.Size = new Size(467, 461);
             CourseflowLayoutPanel.TabIndex = 1;
-            CourseflowLayoutPanel.Paint += flowLayoutPanel8_Paint;
             // 
             // label16
             // 
@@ -248,9 +247,9 @@
             tableLayoutPanel4.Controls.Add(CourseIdlable, 0, 0);
             tableLayoutPanel4.Controls.Add(CourseNamelabel, 0, 1);
             tableLayoutPanel4.Controls.Add(TeacherIdlable, 0, 2);
-            tableLayoutPanel4.Controls.Add(textBox13, 1, 0);
-            tableLayoutPanel4.Controls.Add(textBox14, 1, 1);
-            tableLayoutPanel4.Controls.Add(textBox15, 1, 2);
+            tableLayoutPanel4.Controls.Add(CourseIdtextBox, 1, 0);
+            tableLayoutPanel4.Controls.Add(CourseNametextBox, 1, 1);
+            tableLayoutPanel4.Controls.Add(TeacherIdtextBox, 1, 2);
             tableLayoutPanel4.Location = new Point(3, 40);
             tableLayoutPanel4.Name = "tableLayoutPanel4";
             tableLayoutPanel4.RowCount = 4;
@@ -289,74 +288,75 @@
             TeacherIdlable.TabIndex = 2;
             TeacherIdlable.Text = "教师id";
             // 
-            // textBox13
+            // CourseIdtextBox
             // 
-            textBox13.Location = new Point(119, 3);
-            textBox13.Name = "textBox13";
-            textBox13.Size = new Size(100, 23);
-            textBox13.TabIndex = 4;
+            CourseIdtextBox.Location = new Point(119, 3);
+            CourseIdtextBox.Name = "CourseIdtextBox";
+            CourseIdtextBox.Size = new Size(100, 23);
+            CourseIdtextBox.TabIndex = 4;
             // 
-            // textBox14
+            // CourseNametextBox
             // 
-            textBox14.Location = new Point(119, 31);
-            textBox14.Name = "textBox14";
-            textBox14.Size = new Size(100, 23);
-            textBox14.TabIndex = 5;
+            CourseNametextBox.Location = new Point(119, 31);
+            CourseNametextBox.Name = "CourseNametextBox";
+            CourseNametextBox.Size = new Size(100, 23);
+            CourseNametextBox.TabIndex = 5;
             // 
-            // textBox15
+            // TeacherIdtextBox
             // 
-            textBox15.Location = new Point(119, 59);
-            textBox15.Name = "textBox15";
-            textBox15.Size = new Size(100, 23);
-            textBox15.TabIndex = 6;
+            TeacherIdtextBox.Location = new Point(119, 59);
+            TeacherIdtextBox.Name = "TeacherIdtextBox";
+            TeacherIdtextBox.Size = new Size(100, 23);
+            TeacherIdtextBox.TabIndex = 6;
             // 
             // flowLayoutPanel9
             // 
-            flowLayoutPanel9.Controls.Add(button13);
-            flowLayoutPanel9.Controls.Add(button14);
-            flowLayoutPanel9.Controls.Add(button15);
-            flowLayoutPanel9.Controls.Add(button16);
+            flowLayoutPanel9.Controls.Add(CourseAddBtn);
+            flowLayoutPanel9.Controls.Add(CourseUpdateBtn);
+            flowLayoutPanel9.Controls.Add(CourseDeleteBtn);
+            flowLayoutPanel9.Controls.Add(CourseQueryBtn);
             flowLayoutPanel9.Location = new Point(3, 158);
             flowLayoutPanel9.Name = "flowLayoutPanel9";
             flowLayoutPanel9.Size = new Size(464, 37);
             flowLayoutPanel9.TabIndex = 2;
             // 
-            // button13
+            // CourseAddBtn
             // 
-            button13.Location = new Point(3, 3);
-            button13.Name = "button13";
-            button13.Size = new Size(75, 30);
-            button13.TabIndex = 0;
-            button13.Text = "新增";
-            button13.UseVisualStyleBackColor = true;
+            CourseAddBtn.Location = new Point(3, 3);
+            CourseAddBtn.Name = "CourseAddBtn";
+            CourseAddBtn.Size = new Size(75, 30);
+            CourseAddBtn.TabIndex = 0;
+            CourseAddBtn.Text = "新增";
+            CourseAddBtn.UseVisualStyleBackColor = true;
             // 
-            // button14
+            // CourseUpdateBtn
             // 
-            button14.Location = new Point(84, 3);
-            button14.Name = "button14";
-            button14.Size = new Size(75, 30);
-            button14.TabIndex = 1;
-            button14.Text = "修改";
-            button14.UseVisualStyleBackColor = true;
+            CourseUpdateBtn.Location = new Point(84, 3);
+            CourseUpdateBtn.Name = "CourseUpdateBtn";
+            CourseUpdateBtn.Size = new Size(75, 30);
+            CourseUpdateBtn.TabIndex = 1;
+            CourseUpdateBtn.Text = "修改";
+            CourseUpdateBtn.UseVisualStyleBackColor = true;
             // 
-            // button15
+            // CourseDeleteBtn
             // 
-            button15.Location = new Point(165, 3);
-            button15.Name = "button15";
-            button15.Size = new Size(75, 30);
-            button15.TabIndex = 2;
-            button15.Text = "删除";
-            button15.UseVisualStyleBackColor = true;
+            CourseDeleteBtn.Location = new Point(165, 3);
+            CourseDeleteBtn.Name = "CourseDeleteBtn";
+            CourseDeleteBtn.Size = new Size(75, 30);
+            CourseDeleteBtn.TabIndex = 2;
+            CourseDeleteBtn.Text = "删除";
+            CourseDeleteBtn.UseVisualStyleBackColor = true;
             // 
-            // button16
+            // CourseQueryBtn
             // 
-            button16.Location = new Point(343, 3);
-            button16.Margin = new Padding(100, 3, 3, 3);
-            button16.Name = "button16";
-            button16.Size = new Size(75, 30);
-            button16.TabIndex = 3;
-            button16.Text = "查询";
-            button16.UseVisualStyleBackColor = true;
+            CourseQueryBtn.Location = new Point(343, 3);
+            CourseQueryBtn.Margin = new Padding(100, 3, 3, 3);
+            CourseQueryBtn.Name = "CourseQueryBtn";
+            CourseQueryBtn.Size = new Size(75, 30);
+            CourseQueryBtn.TabIndex = 3;
+            CourseQueryBtn.Text = "查询";
+            CourseQueryBtn.UseVisualStyleBackColor = true;
+            CourseQueryBtn.Click += CourseQueryBtn_Click;
             // 
             // CoursedataGridView
             // 
@@ -985,7 +985,7 @@
             // flowLayoutPanel1
             // 
             flowLayoutPanel1.Controls.Add(StudentAddBtn);
-            flowLayoutPanel1.Controls.Add(UpdateStudentBtn);
+            flowLayoutPanel1.Controls.Add(StudentUpdateBtn);
             flowLayoutPanel1.Controls.Add(StudentDeleteBtn);
             flowLayoutPanel1.Controls.Add(StudentQueryBtn);
             flowLayoutPanel1.Location = new Point(3, 158);
@@ -1003,15 +1003,15 @@
             StudentAddBtn.UseVisualStyleBackColor = true;
             StudentAddBtn.Click += StudentAddBtn_Click;
             // 
-            // UpdateStudentBtn
+            // StudentUpdateBtn
             // 
-            UpdateStudentBtn.Location = new Point(84, 3);
-            UpdateStudentBtn.Name = "UpdateStudentBtn";
-            UpdateStudentBtn.Size = new Size(75, 30);
-            UpdateStudentBtn.TabIndex = 1;
-            UpdateStudentBtn.Text = "修改";
-            UpdateStudentBtn.UseVisualStyleBackColor = true;
-            UpdateStudentBtn.Click += UpdateStudentBtn_Click;
+            StudentUpdateBtn.Location = new Point(84, 3);
+            StudentUpdateBtn.Name = "StudentUpdateBtn";
+            StudentUpdateBtn.Size = new Size(75, 30);
+            StudentUpdateBtn.TabIndex = 1;
+            StudentUpdateBtn.Text = "保存更改";
+            StudentUpdateBtn.UseVisualStyleBackColor = true;
+            StudentUpdateBtn.Click += UpdateStudentBtn_Click;
             // 
             // StudentDeleteBtn
             // 
@@ -1622,7 +1622,7 @@
         private TextBox StudentGendertextBox;
         private FlowLayoutPanel flowLayoutPanel1;
         private Button StudentAddBtn;
-        private Button UpdateStudentBtn;
+        private Button StudentUpdateBtn;
         private Button StudentDeleteBtn;
         private Button StudentQueryBtn;
         private FlowLayoutPanel CourseflowLayoutPanel;
@@ -1631,14 +1631,14 @@
         private Label CourseIdlable;
         private Label CourseNamelabel;
         private Label TeacherIdlable;
-        private TextBox textBox13;
-        private TextBox textBox14;
-        private TextBox textBox15;
+        private TextBox CourseIdtextBox;
+        private TextBox CourseNametextBox;
+        private TextBox TeacherIdtextBox;
         private FlowLayoutPanel flowLayoutPanel9;
-        private Button button13;
-        private Button button14;
-        private Button button15;
-        private Button button16;
+        private Button CourseAddBtn;
+        private Button CourseUpdateBtn;
+        private Button CourseDeleteBtn;
+        private Button CourseQueryBtn;
         private DataGridView CoursedataGridView;
         private FlowLayoutPanel flowLayoutPanel10;
         private Label label21;

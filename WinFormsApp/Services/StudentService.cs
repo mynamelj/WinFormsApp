@@ -24,6 +24,17 @@ namespace WinFormsApp.Services
             _studentRepository = studentRepository;
         }
 
+        public  async Task<bool> DeleteStudentAsync(string id)
+        {
+            if (string.IsNullOrWhiteSpace(id))
+            {
+                // 或者抛出异常
+                return false;
+            }
+            return await _studentRepository.DeleteAsync(id);
+
+        }
+
 
         /// <summary>
         /// 获取所有学生的业务方法
@@ -45,6 +56,13 @@ namespace WinFormsApp.Services
             return await _studentRepository.InsertAsync(student);
         }
 
+
+        public async Task<bool> SaveChangesAsync(IEnumerable<Student> studentsToInsert, IEnumerable<Student> studentsToUpdate)
+        {
+            // 直接调用仓储层的统一保存方法
+            return await _studentRepository.SaveChangesAsync(studentsToInsert, studentsToUpdate);
+        }
+
         public  async  Task<IEnumerable<Student>> SearchStudentsAsync(Student criteria)
         {
             // 在这里可以对criteria进行更复杂的业务验证
@@ -60,5 +78,9 @@ namespace WinFormsApp.Services
             }
             return await _studentRepository.UpdateAsync(students);
         }
+
+
+
+
     }
 }
