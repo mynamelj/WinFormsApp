@@ -12,5 +12,6 @@ namespace WinFormsApp.Services.Interface
         Task<Student> GetStudentByIdAsync(string id);
         Task<IEnumerable<Student>> SearchStudentsAsync(Student criteria);
         Task<bool> InsertStudentAsync(Student student);
+        Task<bool> UpdateStudentAsync(HashSet<Student> students);
     }
 }

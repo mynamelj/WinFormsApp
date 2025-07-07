@@ -7,7 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using WinFormsApp.DataAccess.Inerface;
 using WinFormsApp.Models;
-
+using System.Data.Common; // 添加此命名空间以支持异步事务操作
+using System.Data; // 确保引入了System.Data命名空间
 namespace WinFormsApp.DataAccess
 {
     /// <summary>
@@ -92,6 +93,38 @@ namespace WinFormsApp.DataAccess
             using (var connection = DbConnectionFactory.GetConnection())
             {
                 return await connection.QueryAsync<Student>(sqlBuilder.ToString(), parameters);
+            }
+        }
+
+        // 修改 UpdateAsync 方法中的事务提交和回滚代码
+        public async Task<bool> UpdateAsync(HashSet<Student> students)
+        {
+            using (var connection = DbConnectionFactory.GetConnection())
+            {
+                string sql = @"UPDATE Student 
+                               SET sname = @sname, 
+                                   sage = @sage, 
+                                   ssex = @ssex 
+                               WHERE sid = @sid";
+
+                // 使用同步事务方法
+                using (var transaction = connection.BeginTransaction())
+                {
+                    try
+                    {
+                        // 使用异步执行
+                        int affectedRows = await connection.ExecuteAsync(sql, students, transaction: transaction);
+
+                        transaction.Commit(); // 使用同步 Commit 方法
+
+                        return affectedRows > 0;
+                    }
+                    catch (Exception)
+                    {
+                        transaction.Rollback(); // 使用同步 Rollback 方法
+                        throw; // 重新抛出异常
+                    }
+                }
             }
         }
 

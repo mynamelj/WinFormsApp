@@ -50,5 +50,15 @@ namespace WinFormsApp.Services
             // 在这里可以对criteria进行更复杂的业务验证
             return await _studentRepository.SearchAsync(criteria);
         }
+
+        public async  Task<bool> UpdateStudentAsync(HashSet<Student> students)
+        {
+            if (students == null || students.Count == 0)
+            {
+                // 或者抛出异常
+                return false;
+            }
+            return await _studentRepository.UpdateAsync(students);
+        }
     }
 }

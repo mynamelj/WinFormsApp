@@ -12,5 +12,6 @@ namespace WinFormsApp.DataAccess.Inerface
         Task<Student> GetByIdAsync(string id); // 返回单个学生对象
         Task<IEnumerable<Student>> SearchAsync(Student criteria);
         Task<bool> InsertAsync(Student student); // 插入新学生
+        Task<bool> UpdateAsync(HashSet<Student> students);
     }
 }
