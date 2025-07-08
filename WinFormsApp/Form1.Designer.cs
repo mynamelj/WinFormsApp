@@ -32,7 +32,7 @@
             MainLayoutPanel = new TableLayoutPanel();
             CourseflowLayoutPanel = new FlowLayoutPanel();
             label16 = new Label();
-            tableLayoutPanel4 = new TableLayoutPanel();
+            CourseInputtableLayoutPanel = new TableLayoutPanel();
             CourseIdlable = new Label();
             CourseNamelabel = new Label();
             TeacherIdlable = new Label();
@@ -166,7 +166,7 @@
             dataGridView3 = new DataGridView();
             MainLayoutPanel.SuspendLayout();
             CourseflowLayoutPanel.SuspendLayout();
-            tableLayoutPanel4.SuspendLayout();
+            CourseInputtableLayoutPanel.SuspendLayout();
             flowLayoutPanel9.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)CoursedataGridView).BeginInit();
             flowLayoutPanel10.SuspendLayout();
@@ -217,7 +217,7 @@
             // CourseflowLayoutPanel
             // 
             CourseflowLayoutPanel.Controls.Add(label16);
-            CourseflowLayoutPanel.Controls.Add(tableLayoutPanel4);
+            CourseflowLayoutPanel.Controls.Add(CourseInputtableLayoutPanel);
             CourseflowLayoutPanel.Controls.Add(flowLayoutPanel9);
             CourseflowLayoutPanel.Controls.Add(CoursedataGridView);
             CourseflowLayoutPanel.Controls.Add(flowLayoutPanel10);
@@ -237,28 +237,28 @@
             label16.TabIndex = 0;
             label16.Text = "课程表";
             // 
-            // tableLayoutPanel4
+            // CourseInputtableLayoutPanel
             // 
-            tableLayoutPanel4.ColumnCount = 4;
-            tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
-            tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
-            tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
-            tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
-            tableLayoutPanel4.Controls.Add(CourseIdlable, 0, 0);
-            tableLayoutPanel4.Controls.Add(CourseNamelabel, 0, 1);
-            tableLayoutPanel4.Controls.Add(TeacherIdlable, 0, 2);
-            tableLayoutPanel4.Controls.Add(CourseIdtextBox, 1, 0);
-            tableLayoutPanel4.Controls.Add(CourseNametextBox, 1, 1);
-            tableLayoutPanel4.Controls.Add(TeacherIdtextBox, 1, 2);
-            tableLayoutPanel4.Location = new Point(3, 40);
-            tableLayoutPanel4.Name = "tableLayoutPanel4";
-            tableLayoutPanel4.RowCount = 4;
-            tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
-            tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
-            tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Percent, 22F));
-            tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
-            tableLayoutPanel4.Size = new Size(464, 112);
-            tableLayoutPanel4.TabIndex = 1;
+            CourseInputtableLayoutPanel.ColumnCount = 4;
+            CourseInputtableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
+            CourseInputtableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
+            CourseInputtableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
+            CourseInputtableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
+            CourseInputtableLayoutPanel.Controls.Add(CourseIdlable, 0, 0);
+            CourseInputtableLayoutPanel.Controls.Add(CourseNamelabel, 0, 1);
+            CourseInputtableLayoutPanel.Controls.Add(TeacherIdlable, 0, 2);
+            CourseInputtableLayoutPanel.Controls.Add(CourseIdtextBox, 1, 0);
+            CourseInputtableLayoutPanel.Controls.Add(CourseNametextBox, 1, 1);
+            CourseInputtableLayoutPanel.Controls.Add(TeacherIdtextBox, 1, 2);
+            CourseInputtableLayoutPanel.Location = new Point(3, 40);
+            CourseInputtableLayoutPanel.Name = "CourseInputtableLayoutPanel";
+            CourseInputtableLayoutPanel.RowCount = 4;
+            CourseInputtableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
+            CourseInputtableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
+            CourseInputtableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 22F));
+            CourseInputtableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
+            CourseInputtableLayoutPanel.Size = new Size(464, 112);
+            CourseInputtableLayoutPanel.TabIndex = 1;
             // 
             // CourseIdlable
             // 
@@ -328,6 +328,7 @@
             CourseAddBtn.TabIndex = 0;
             CourseAddBtn.Text = "新增";
             CourseAddBtn.UseVisualStyleBackColor = true;
+            CourseAddBtn.Click += CourseAddBtn_Click;
             // 
             // CourseUpdateBtn
             // 
@@ -335,7 +336,7 @@
             CourseUpdateBtn.Name = "CourseUpdateBtn";
             CourseUpdateBtn.Size = new Size(75, 30);
             CourseUpdateBtn.TabIndex = 1;
-            CourseUpdateBtn.Text = "修改";
+            CourseUpdateBtn.Text = "保存更改";
             CourseUpdateBtn.UseVisualStyleBackColor = true;
             // 
             // CourseDeleteBtn
@@ -1556,8 +1557,8 @@
             MainLayoutPanel.ResumeLayout(false);
             CourseflowLayoutPanel.ResumeLayout(false);
             CourseflowLayoutPanel.PerformLayout();
-            tableLayoutPanel4.ResumeLayout(false);
-            tableLayoutPanel4.PerformLayout();
+            CourseInputtableLayoutPanel.ResumeLayout(false);
+            CourseInputtableLayoutPanel.PerformLayout();
             flowLayoutPanel9.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)CoursedataGridView).EndInit();
             flowLayoutPanel10.ResumeLayout(false);
@@ -1627,7 +1628,7 @@
         private Button StudentQueryBtn;
         private FlowLayoutPanel CourseflowLayoutPanel;
         private Label label16;
-        private TableLayoutPanel tableLayoutPanel4;
+        private TableLayoutPanel CourseInputtableLayoutPanel;
         private Label CourseIdlable;
         private Label CourseNamelabel;
         private Label TeacherIdlable;

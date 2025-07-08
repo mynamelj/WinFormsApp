@@ -37,7 +37,7 @@ namespace WinFormsApp
             _courseService = courseService;
         }
 
-        private  async Task LoadStudentsAsync()
+        private async Task LoadStudentsAsync()
         {
 
             var allStudents = await _studentService.GetStudentAllAsync();
@@ -178,7 +178,7 @@ namespace WinFormsApp
             }
         }
 
-        private async void StudentAddBtn_Click(object sender, EventArgs e)
+        private void StudentAddBtn_Click(object sender, EventArgs e)
         {
 
             using (AddStudentWindow addStudentWindow = new AddStudentWindow(_studentService))
@@ -209,14 +209,14 @@ namespace WinFormsApp
         {
             var criteria = new CourseTeacherView
             {
-                Cid= CourseIdtextBox.Text.Trim(),
-                Cname= CourseNametextBox.Text.Trim(),
-                Tid= TeacherIdtextBox.Text.Trim(),
+                Cid = CourseIdtextBox.Text.Trim(),
+                Cname = CourseNametextBox.Text.Trim(),
+                Tid = TeacherIdtextBox.Text.Trim(),
             };
             try
             {
                 // 2. 调用服务层的统一查询方法
-                 var cos = (await _courseService.SearchCoursesAsync(criteria)).ToList();
+                var cos = (await _courseService.SearchCoursesAsync(criteria)).ToList();
                 courses = new BindingList<CourseTeacherView>(cos); // 将 IEnumerable 转换为 IList
                 // 3. 绑定结果到DataGridView
                 CoursedataGridView.DataSource = courses;
@@ -233,6 +233,16 @@ namespace WinFormsApp
             {
                 MessageBox.Show($"查询时发生错误: {ex.Message}", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void CourseAddBtn_Click(object sender, EventArgs e)
+        {
+            using (AddCourseWindow addCourseWindow = new AddCourseWindow(_courseService))
+            {
+                // 显示添加课程信息的窗口
+                DialogResult result = addCourseWindow.ShowDialog();
+            }
+
         }
     }
 }

@@ -18,6 +18,50 @@ namespace WinFormsApp.DataAccess
 
     public class CourseRepository : ICourseRepository
     {
+        public Task<bool> InsertAsync(Course course)
+        {
+            
+        }
+
+        public  async Task<bool> SaveChangesAsync(IEnumerable<CourseTeacherView> coursesToInsert, IEnumerable<CourseTeacherView> coursesToUpdate)
+        {
+            using (var connection = DbConnectionFactory.GetConnection())
+            {
+                using (var transaction = connection.BeginTransaction())
+                {
+                    try
+                    {
+                        // 定义插入和更新的SQL语句
+                        string insertSql = "INSERT INTO Course(Cid, Cname, TId) VALUES(@Cid, @Cname, @TId)";
+                        string updateSql = "UPDATE Courset SET Cname = @Cname, TId = @TId WHERE Cid = @Cid,";
+
+                        // 1. 批量执行插入操作
+                        if (coursesToInsert != null && coursesToInsert.Any())
+                        {
+                            await connection.ExecuteAsync(insertSql, coursesToInsert, transaction);
+                        }
+
+                        // 2. 批量执行更新操作
+                        if (coursesToUpdate != null && coursesToUpdate.Any())
+                        {
+                            await connection.ExecuteAsync(updateSql, coursesToUpdate, transaction);
+                        }
+
+                        // 3. 如果所有操作都成功，提交事务
+                        transaction.Commit();
+                        return true;
+                    }
+                    catch (Exception)
+                    {
+                        // 4. 如果任何一个操作失败，回滚整个事务
+                        transaction.Rollback();
+                        throw; // 向上抛出异常，让上层知道操作失败了
+                    }
+                }
+            }
+            throw new NotImplementedException();
+        }
+
         public async Task<IEnumerable<CourseTeacherView>> SearchAsync(CourseTeacherView criteria)
         {
             // 修正1：为表设置别名(c 和 t)，并用别名限定所有列，避免歧义

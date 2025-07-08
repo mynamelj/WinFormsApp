@@ -30,15 +30,15 @@
         {
             tableLayoutPanel1 = new TableLayoutPanel();
             tableLayoutPanel2 = new TableLayoutPanel();
-            StudentBirthdaytextBox = new TextBox();
             StudentNamelabel = new Label();
-            StudentBirthdaylabel = new Label();
             StudentNametextBox = new TextBox();
+            StudentBirthdaylabel = new Label();
+            StudentBirthdaytextBox = new TextBox();
+            StudentGenderlabel = new Label();
+            StudentGendertextBox = new TextBox();
             flowLayoutPanel1 = new FlowLayoutPanel();
             Confirm = new Button();
-            取消 = new Button();
-            StudentGenderlable = new Label();
-            StudentGendertextBox = new TextBox();
+            Cancel = new Button();
             tableLayoutPanel1.SuspendLayout();
             tableLayoutPanel2.SuspendLayout();
             flowLayoutPanel1.SuspendLayout();
@@ -67,7 +67,7 @@
             tableLayoutPanel2.Controls.Add(StudentNametextBox, 1, 0);
             tableLayoutPanel2.Controls.Add(StudentBirthdaylabel, 0, 1);
             tableLayoutPanel2.Controls.Add(StudentBirthdaytextBox, 1, 1);
-            tableLayoutPanel2.Controls.Add(StudentGenderlable, 0, 2);
+            tableLayoutPanel2.Controls.Add(StudentGenderlabel, 0, 2);
             tableLayoutPanel2.Controls.Add(StudentGendertextBox, 1, 2);
             tableLayoutPanel2.Location = new Point(3, 3);
             tableLayoutPanel2.Name = "tableLayoutPanel2";
@@ -78,30 +78,14 @@
             tableLayoutPanel2.Size = new Size(357, 170);
             tableLayoutPanel2.TabIndex = 0;
             // 
-            // StudentBirthdaytextBox
-            // 
-            StudentBirthdaytextBox.Location = new Point(92, 59);
-            StudentBirthdaytextBox.Name = "StudentBirthdaytextBox";
-            StudentBirthdaytextBox.Size = new Size(121, 23);
-            StudentBirthdaytextBox.TabIndex = 4;
-            // 
             // StudentNamelabel
             // 
             StudentNamelabel.AutoSize = true;
             StudentNamelabel.Location = new Point(3, 0);
             StudentNamelabel.Name = "StudentNamelabel";
-            StudentNamelabel.Size = new Size(32, 17);
+            StudentNamelabel.Size = new Size(56, 17);
             StudentNamelabel.TabIndex = 0;
-            StudentNamelabel.Text = "姓名";
-            // 
-            // StudentBirthdaylabel
-            // 
-            StudentBirthdaylabel.AutoSize = true;
-            StudentBirthdaylabel.Location = new Point(3, 56);
-            StudentBirthdaylabel.Name = "StudentBirthdaylabel";
-            StudentBirthdaylabel.Size = new Size(56, 17);
-            StudentBirthdaylabel.TabIndex = 1;
-            StudentBirthdaylabel.Text = "出生年月";
+            StudentNamelabel.Text = "学生姓名";
             // 
             // StudentNametextBox
             // 
@@ -110,10 +94,42 @@
             StudentNametextBox.Size = new Size(121, 23);
             StudentNametextBox.TabIndex = 3;
             // 
+            // StudentBirthdaylabel
+            // 
+            StudentBirthdaylabel.AutoSize = true;
+            StudentBirthdaylabel.Location = new Point(3, 56);
+            StudentBirthdaylabel.Name = "StudentBirthdaylabel";
+            StudentBirthdaylabel.Size = new Size(56, 17);
+            StudentBirthdaylabel.TabIndex = 1;
+            StudentBirthdaylabel.Text = "学生生日";
+            // 
+            // StudentBirthdaytextBox
+            // 
+            StudentBirthdaytextBox.Location = new Point(92, 59);
+            StudentBirthdaytextBox.Name = "StudentBirthdaytextBox";
+            StudentBirthdaytextBox.Size = new Size(121, 23);
+            StudentBirthdaytextBox.TabIndex = 4;
+            // 
+            // StudentGenderlabel
+            // 
+            StudentGenderlabel.AutoSize = true;
+            StudentGenderlabel.Location = new Point(3, 112);
+            StudentGenderlabel.Name = "StudentGenderlabel";
+            StudentGenderlabel.Size = new Size(56, 17);
+            StudentGenderlabel.TabIndex = 2;
+            StudentGenderlabel.Text = "学生性别";
+            // 
+            // StudentGendertextBox
+            // 
+            StudentGendertextBox.Location = new Point(92, 115);
+            StudentGendertextBox.Name = "StudentGendertextBox";
+            StudentGendertextBox.Size = new Size(121, 23);
+            StudentGendertextBox.TabIndex = 5;
+            // 
             // flowLayoutPanel1
             // 
             flowLayoutPanel1.Controls.Add(Confirm);
-            flowLayoutPanel1.Controls.Add(取消);
+            flowLayoutPanel1.Controls.Add(Cancel);
             flowLayoutPanel1.Location = new Point(3, 179);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
             flowLayoutPanel1.Size = new Size(357, 58);
@@ -133,33 +149,17 @@
             Confirm.UseVisualStyleBackColor = true;
             Confirm.Click += Confirm_Click;
             // 
-            // 取消
+            // Cancel
             // 
-            取消.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            取消.DialogResult = DialogResult.Cancel;
-            取消.Location = new Point(228, 3);
-            取消.Margin = new Padding(100, 3, 3, 3);
-            取消.Name = "取消";
-            取消.Size = new Size(75, 23);
-            取消.TabIndex = 1;
-            取消.Text = "取消";
-            取消.UseVisualStyleBackColor = true;
-            // 
-            // StudentGenderlable
-            // 
-            StudentGenderlable.AutoSize = true;
-            StudentGenderlable.Location = new Point(3, 112);
-            StudentGenderlable.Name = "StudentGenderlable";
-            StudentGenderlable.Size = new Size(32, 17);
-            StudentGenderlable.TabIndex = 2;
-            StudentGenderlable.Text = "性别";
-            // 
-            // StudentGendertextBox
-            // 
-            StudentGendertextBox.Location = new Point(92, 115);
-            StudentGendertextBox.Name = "StudentGendertextBox";
-            StudentGendertextBox.Size = new Size(121, 23);
-            StudentGendertextBox.TabIndex = 5;
+            Cancel.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            Cancel.DialogResult = DialogResult.Cancel;
+            Cancel.Location = new Point(228, 3);
+            Cancel.Margin = new Padding(100, 3, 3, 3);
+            Cancel.Name = "Cancel";
+            Cancel.Size = new Size(75, 23);
+            Cancel.TabIndex = 1;
+            Cancel.Text = "取消";
+            Cancel.UseVisualStyleBackColor = true;
             // 
             // AddStudentWindow
             // 
@@ -182,12 +182,12 @@
         private TableLayoutPanel tableLayoutPanel2;
         private FlowLayoutPanel flowLayoutPanel1;
         private Button Confirm;
-        private Button 取消;
+        private Button Cancel;
         private Label StudentNamelabel;
         private Label StudentBirthdaylabel;
         private TextBox StudentBirthdaytextBox;
         private TextBox StudentNametextBox;
-        private Label StudentGenderlable;
+        private Label StudentGenderlabel;
         private TextBox StudentGendertextBox;
     }
 }
