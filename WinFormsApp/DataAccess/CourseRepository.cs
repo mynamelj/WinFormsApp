@@ -45,18 +45,31 @@ namespace WinFormsApp.DataAccess
                     {
                         // 定义插入和更新的SQL语句
                         string insertSql = "INSERT INTO Course(Cid, Cname, TId) VALUES(@Cid, @Cname, @TId)";
-                        string updateSql = "UPDATE Courset SET Cname = @Cname, TId = @TId WHERE Cid = @Cid,";
+                        string updateSql = "UPDATE Course SET Cname = @Cname, TId = @TId WHERE Cid = @Cid";
 
                         // 1. 批量执行插入操作
                         if (coursesToInsert != null && coursesToInsert.Any())
                         {
-                            await connection.ExecuteAsync(insertSql, coursesToInsert, transaction);
+                            //映射 CourseTeacherView 到 Course
+                            IEnumerable<Course> courses= coursesToInsert.Select(c => new Course
+                            {
+                                Cid = c.Cid,
+                                Cname = c.Cname,
+                                Tid = c.Tid
+                            });
+                            await connection.ExecuteAsync(insertSql, courses, transaction);
                         }
 
                         // 2. 批量执行更新操作
                         if (coursesToUpdate != null && coursesToUpdate.Any())
                         {
-                            await connection.ExecuteAsync(updateSql, coursesToUpdate, transaction);
+                            IEnumerable<Course> courses = coursesToUpdate.Select(c => new Course
+                            {
+                                Cid = c.Cid,
+                                Cname = c.Cname,
+                                Tid = c.Tid
+                            });
+                            await connection.ExecuteAsync(updateSql, courses, transaction);
                         }
 
                         // 3. 如果所有操作都成功，提交事务

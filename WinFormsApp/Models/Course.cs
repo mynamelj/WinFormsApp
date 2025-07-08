@@ -3,18 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 namespace WinFormsApp.Models
 {
-    using System.ComponentModel;
-    using System.Runtime.CompilerServices;
+
 
     public class Course : INotifyPropertyChanged
     {
-        private string _cid;
-        private string _cname;
-        private string _tid;
-        public event PropertyChangedEventHandler PropertyChanged;
+        private string? _cid;
+        private string? _cname;
+        private string? _tid;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         /// <summary>
         /// 课程编号

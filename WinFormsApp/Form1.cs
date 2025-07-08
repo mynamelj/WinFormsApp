@@ -1,3 +1,4 @@
+using Dapper;
 using Microsoft.VisualBasic;
 using System;
 using System.ComponentModel;
@@ -6,6 +7,7 @@ using System.Security.Cryptography;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
+using WinFormsApp.DataAccess;
 using WinFormsApp.Models;
 using WinFormsApp.Models.DTO;
 using WinFormsApp.Services;
@@ -28,6 +30,7 @@ namespace WinFormsApp
         //检查是否有新学生添加
         private HashSet<Student> newStudents = new HashSet<Student>();
         private HashSet<CourseTeacherView> modifiedCourses = new HashSet<CourseTeacherView>();
+        private HashSet<CourseTeacherView> newCourses = new HashSet<CourseTeacherView>();
 
         // 让构造函数接收 IStudentService 依赖
         public Form1(IStudentService studentService, ICourseService courseService)
@@ -61,7 +64,8 @@ namespace WinFormsApp
                 // 假设日期控件为DateTimePicker，性别为ComboBox
                 // 如果控件未启用或未选择，则条件为null
                 sage = StudentBirthdaytextBox.Enabled && DateTime.TryParse(StudentBirthdaytextBox.Text.Trim(), out var date) ? date : (DateTime?)null,
-                ssex = StudentGendertextBox.Text.Trim()
+                ssex = StudentGendercomboBox.SelectedItem.ToString() == " " ? null : StudentGendercomboBox.SelectedItem.ToString()
+
             };
             try
             {
@@ -85,7 +89,7 @@ namespace WinFormsApp
                 MessageBox.Show($"查询时发生错误: {ex.Message}", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        // 这是 ListChanged 事件的处理程序
+        //  ListChanged 事件的处理程序,监听学生列表的变化
         private void Students_ListChanged(object sender, ListChangedEventArgs e)
         {
             switch (e.ListChangedType)
@@ -108,6 +112,28 @@ namespace WinFormsApp
                     {
                         Student newStudent = students[e.NewIndex];
                         newStudents.Add(newStudent);
+                        break;
+                    }
+            }
+        }
+        // Update the method signature to allow nullable reference types
+        private void Courses_ListChanged(object? sender, ListChangedEventArgs e)
+        {
+            switch (e.ListChangedType)
+            {
+                case ListChangedType.ItemChanged:
+                    {
+                        CourseTeacherView changedCourse = courses[e.NewIndex];
+                        if (!newCourses.Contains(changedCourse))
+                        {
+                            modifiedCourses.Add(changedCourse);
+                        }
+                        break;
+                    }
+                case ListChangedType.ItemAdded:
+                    {
+                        CourseTeacherView newCourse = courses[e.NewIndex];
+                        newCourses.Add(newCourse);
                         break;
                     }
             }
@@ -138,7 +164,7 @@ namespace WinFormsApp
             }
         }
 
-        // 正确的 Form1 按钮事件代码
+
         private async void UpdateStudentBtn_Click(object sender, EventArgs e)
         {
             this.StudentDataGridView.EndEdit();
@@ -218,6 +244,7 @@ namespace WinFormsApp
                 // 2. 调用服务层的统一查询方法
                 var cos = (await _courseService.SearchCoursesAsync(criteria)).ToList();
                 courses = new BindingList<CourseTeacherView>(cos); // 将 IEnumerable 转换为 IList
+                courses.ListChanged += Courses_ListChanged; // 订阅 ListChanged 事件
                 // 3. 绑定结果到DataGridView
                 CoursedataGridView.DataSource = courses;
                 // 如果需要，可以设置DataGridView的列标题等属性
@@ -235,14 +262,68 @@ namespace WinFormsApp
             }
         }
 
-        private void CourseAddBtn_Click(object sender, EventArgs e)
+        private async void CourseAddBtn_Click(object sender, EventArgs e)
         {
             using (AddCourseWindow addCourseWindow = new AddCourseWindow(_courseService))
             {
+                using (var connection = DbConnectionFactory.GetConnection())
+                {
+                    try
+                    {
+                        const string sql = "SELECT CAST(Tid AS NVARCHAR(50)) FROM Teacher;";
+                        var res = await connection.QueryAsync<string>(sql);
+                        addCourseWindow.TeachercomboBox.DataSource = res.ToList(); // 使用实例对象
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"获取教师列表失败: {ex.Message}", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                }
                 // 显示添加课程信息的窗口
                 DialogResult result = addCourseWindow.ShowDialog();
             }
-
         }
+
+        private async void CourseUpdateBtn_Click(object sender, EventArgs e)
+        {
+            CoursedataGridView.EndEdit();
+            this.Validate();
+
+            // 检查是否有任何需要保存的更改（无论是新增还是修改）
+            if (!newCourses.Any() && !modifiedCourses.Any())
+            {
+                MessageBox.Show("没有检测到任何数据更改。");
+                return;
+            }
+
+            try
+            {
+                // 关键：调用统一的保存方法，将两个集合都传过去
+                bool success = await _courseService.UpdateCourseAsync(newCourses, modifiedCourses);
+
+                if (success)
+                {
+                    MessageBox.Show("课程数据保存成功！", "成功", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    // 操作成功后，清空两个跟踪集合
+                    newCourses.Clear();
+                    modifiedCourses.Clear();
+
+                    // （可选但推荐）重新加载数据，以获取新插入记录的自增ID
+                   // await LoadCoursesAsync();
+                }
+                else
+                {
+                    MessageBox.Show("保存失败，没有行受到影响或发生未知错误。", "失败", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"保存课程数据时发生错误: {ex.Message}", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+
     }
 }

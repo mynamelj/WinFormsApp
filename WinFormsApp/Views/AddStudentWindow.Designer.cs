@@ -30,15 +30,17 @@
         {
             tableLayoutPanel1 = new TableLayoutPanel();
             tableLayoutPanel2 = new TableLayoutPanel();
+            StudentIdtextBox = new TextBox();
+            StudentIdlabel = new Label();
             StudentNamelabel = new Label();
             StudentNametextBox = new TextBox();
             StudentBirthdaylabel = new Label();
             StudentBirthdaytextBox = new TextBox();
             StudentGenderlabel = new Label();
-            StudentGendertextBox = new TextBox();
             flowLayoutPanel1 = new FlowLayoutPanel();
             Confirm = new Button();
             Cancel = new Button();
+            StudentGendercomboBox = new ComboBox();
             tableLayoutPanel1.SuspendLayout();
             tableLayoutPanel2.SuspendLayout();
             flowLayoutPanel1.SuspendLayout();
@@ -63,20 +65,39 @@
             tableLayoutPanel2.ColumnCount = 2;
             tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
             tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 75F));
+            tableLayoutPanel2.Controls.Add(StudentIdtextBox, 1, 3);
+            tableLayoutPanel2.Controls.Add(StudentIdlabel, 0, 3);
             tableLayoutPanel2.Controls.Add(StudentNamelabel, 0, 0);
             tableLayoutPanel2.Controls.Add(StudentNametextBox, 1, 0);
             tableLayoutPanel2.Controls.Add(StudentBirthdaylabel, 0, 1);
             tableLayoutPanel2.Controls.Add(StudentBirthdaytextBox, 1, 1);
             tableLayoutPanel2.Controls.Add(StudentGenderlabel, 0, 2);
-            tableLayoutPanel2.Controls.Add(StudentGendertextBox, 1, 2);
+            tableLayoutPanel2.Controls.Add(StudentGendercomboBox, 1, 2);
             tableLayoutPanel2.Location = new Point(3, 3);
             tableLayoutPanel2.Name = "tableLayoutPanel2";
-            tableLayoutPanel2.RowCount = 3;
+            tableLayoutPanel2.RowCount = 4;
+            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
             tableLayoutPanel2.Size = new Size(357, 170);
             tableLayoutPanel2.TabIndex = 0;
+            // 
+            // StudentIdtextBox
+            // 
+            StudentIdtextBox.Location = new Point(92, 129);
+            StudentIdtextBox.Name = "StudentIdtextBox";
+            StudentIdtextBox.Size = new Size(121, 23);
+            StudentIdtextBox.TabIndex = 7;
+            // 
+            // StudentIdlabel
+            // 
+            StudentIdlabel.AutoSize = true;
+            StudentIdlabel.Location = new Point(3, 126);
+            StudentIdlabel.Name = "StudentIdlabel";
+            StudentIdlabel.Size = new Size(45, 17);
+            StudentIdlabel.TabIndex = 6;
+            StudentIdlabel.Text = "学生ID";
             // 
             // StudentNamelabel
             // 
@@ -97,7 +118,7 @@
             // StudentBirthdaylabel
             // 
             StudentBirthdaylabel.AutoSize = true;
-            StudentBirthdaylabel.Location = new Point(3, 56);
+            StudentBirthdaylabel.Location = new Point(3, 42);
             StudentBirthdaylabel.Name = "StudentBirthdaylabel";
             StudentBirthdaylabel.Size = new Size(56, 17);
             StudentBirthdaylabel.TabIndex = 1;
@@ -105,7 +126,7 @@
             // 
             // StudentBirthdaytextBox
             // 
-            StudentBirthdaytextBox.Location = new Point(92, 59);
+            StudentBirthdaytextBox.Location = new Point(92, 45);
             StudentBirthdaytextBox.Name = "StudentBirthdaytextBox";
             StudentBirthdaytextBox.Size = new Size(121, 23);
             StudentBirthdaytextBox.TabIndex = 4;
@@ -113,18 +134,11 @@
             // StudentGenderlabel
             // 
             StudentGenderlabel.AutoSize = true;
-            StudentGenderlabel.Location = new Point(3, 112);
+            StudentGenderlabel.Location = new Point(3, 84);
             StudentGenderlabel.Name = "StudentGenderlabel";
             StudentGenderlabel.Size = new Size(56, 17);
             StudentGenderlabel.TabIndex = 2;
             StudentGenderlabel.Text = "学生性别";
-            // 
-            // StudentGendertextBox
-            // 
-            StudentGendertextBox.Location = new Point(92, 115);
-            StudentGendertextBox.Name = "StudentGendertextBox";
-            StudentGendertextBox.Size = new Size(121, 23);
-            StudentGendertextBox.TabIndex = 5;
             // 
             // flowLayoutPanel1
             // 
@@ -161,6 +175,18 @@
             Cancel.Text = "取消";
             Cancel.UseVisualStyleBackColor = true;
             // 
+            // StudentGendercomboBox
+            // 
+            StudentGendercomboBox.FormattingEnabled = true;
+            StudentGendercomboBox.Location = new Point(92, 87);
+            StudentGendercomboBox.Name = "StudentGendercomboBox";
+            StudentGendercomboBox.Size = new Size(121, 25);
+            StudentGendercomboBox.Items.Add("男");
+            StudentGendercomboBox.Items.Add("女");
+            //默认选择男
+            StudentGendercomboBox.SelectedIndex = 0;
+            StudentGendercomboBox.TabIndex = 8;
+            // 
             // AddStudentWindow
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
@@ -188,6 +214,8 @@
         private TextBox StudentBirthdaytextBox;
         private TextBox StudentNametextBox;
         private Label StudentGenderlabel;
-        private TextBox StudentGendertextBox;
+        private Label StudentIdlabel;
+        private TextBox StudentIdtextBox;
+        private ComboBox StudentGendercomboBox;
     }
 }

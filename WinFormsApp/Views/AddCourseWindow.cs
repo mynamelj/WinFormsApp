@@ -1,12 +1,15 @@
-﻿using System;
+﻿using Dapper;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Common;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WinFormsApp.DataAccess;
 using WinFormsApp.Models;
 using WinFormsApp.Services.Interface;
 
@@ -37,10 +40,12 @@ namespace WinFormsApp.Views
                 return ;
             }
 
-            // 验证教师ID，只能为数字
-            if (string.IsNullOrWhiteSpace(CourseTeacherBox.Text.Trim()) || !int.TryParse(CourseTeacherBox.Text.Trim(), out _))
+            // 从数据库获取教师列表赋值给comboBox
+
+            //验证教师是否选中，必须选中一个教师
+            if (TeachercomboBox.SelectedItem == null)
             {
-                MessageBox.Show("请输入有效的教师ID", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("请选择一个教师", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return ;
             }
 
@@ -49,7 +54,7 @@ namespace WinFormsApp.Views
             {
                 Cid = CourseIdBox.Text.Trim(),
                 Cname = CourseNameBox.Text.Trim(),
-                Tid = CourseTeacherBox.Text.Trim()
+                Tid = TeachercomboBox.SelectedItem?.ToString() ?? string.Empty // 选中教师编号
             };
             try
             {

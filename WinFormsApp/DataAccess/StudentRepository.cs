@@ -50,7 +50,7 @@ namespace WinFormsApp.DataAccess
         {
             using (var connection = DbConnectionFactory.GetConnection())
             {
-                string sql = "INSERT INTO Student( sname, sage, ssex) VALUES( @sname, @sage, @ssex)";
+                string sql = "INSERT INTO Student(sid, sname, sage, ssex) VALUES(@sid, @sname, @sage, @ssex)";
                 var affectedRows = await connection.ExecuteAsync(sql, student);
                 return affectedRows > 0;
 
@@ -143,7 +143,7 @@ namespace WinFormsApp.DataAccess
                     try
                     {
                         // 定义插入和更新的SQL语句
-                        string insertSql = "INSERT INTO Student(sname, sage, ssex) VALUES(@sname, @sage, @ssex)";
+                        string insertSql = "INSERT INTO Student(sid,sname, sage, ssex) VALUES(@sid,@sname, @sage, @ssex)";
                         string updateSql = "UPDATE Student SET sname = @sname, sage = @sage, ssex = @ssex WHERE sid = @sid";
 
                         // 1. 批量执行插入操作

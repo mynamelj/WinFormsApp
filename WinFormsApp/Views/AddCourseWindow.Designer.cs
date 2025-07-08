@@ -31,12 +31,12 @@ namespace WinFormsApp.Views
         private void InitializeComponent()
         {
             tableLayoutPanel1 = new TableLayoutPanel();
-            CourseTeacherBox = new TextBox();
             CourseIdBox = new TextBox();
             CourseNamelabel = new Label();
             CourseIdlabel = new Label();
             CourseTeacherlabel = new Label();
             CourseNameBox = new TextBox();
+            TeachercomboBox = new ComboBox();
             flowLayoutPanel1 = new FlowLayoutPanel();
             Confirm = new Button();
             Cancel = new Button();
@@ -49,12 +49,12 @@ namespace WinFormsApp.Views
             tableLayoutPanel1.ColumnCount = 2;
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 75F));
-            tableLayoutPanel1.Controls.Add(CourseTeacherBox, 1, 2);
             tableLayoutPanel1.Controls.Add(CourseIdBox, 1, 1);
             tableLayoutPanel1.Controls.Add(CourseNamelabel, 0, 0);
             tableLayoutPanel1.Controls.Add(CourseIdlabel, 0, 1);
             tableLayoutPanel1.Controls.Add(CourseTeacherlabel, 0, 2);
             tableLayoutPanel1.Controls.Add(CourseNameBox, 1, 0);
+            tableLayoutPanel1.Controls.Add(TeachercomboBox, 1, 2);
             tableLayoutPanel1.Location = new Point(2, 1);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 3;
@@ -63,13 +63,6 @@ namespace WinFormsApp.Views
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
             tableLayoutPanel1.Size = new Size(361, 170);
             tableLayoutPanel1.TabIndex = 0;
-            // 
-            // CourseTeacherBox
-            // 
-            CourseTeacherBox.Location = new Point(93, 115);
-            CourseTeacherBox.Name = "CourseTeacherBox";
-            CourseTeacherBox.Size = new Size(130, 23);
-            CourseTeacherBox.TabIndex = 5;
             // 
             // CourseIdBox
             // 
@@ -111,6 +104,14 @@ namespace WinFormsApp.Views
             CourseNameBox.Name = "CourseNameBox";
             CourseNameBox.Size = new Size(130, 23);
             CourseNameBox.TabIndex = 3;
+            // 
+            // TeachercomboBox
+            // 
+            TeachercomboBox.FormattingEnabled = true;
+            TeachercomboBox.Location = new Point(93, 115);
+            TeachercomboBox.Name = "TeachercomboBox";
+            TeachercomboBox.Size = new Size(121, 25);
+            TeachercomboBox.TabIndex = 5;
             // 
             // flowLayoutPanel1
             // 
@@ -164,11 +165,11 @@ namespace WinFormsApp.Views
         private Label CourseNamelabel;
         private Label CourseIdlabel;
         private Label CourseTeacherlabel;
-        private TextBox CourseTeacherBox;
         private TextBox CourseIdBox;
         private TextBox CourseNameBox;
         private FlowLayoutPanel flowLayoutPanel1;
         private Button Confirm;
         private Button Cancel;
+        public ComboBox TeachercomboBox;
     }
 }

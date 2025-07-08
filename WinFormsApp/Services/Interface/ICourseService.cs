@@ -14,5 +14,7 @@ namespace WinFormsApp.Services.Interface
 
         // 新增课程
         Task<bool> InsertCourseAsync(Course course);
+        // 批量保存课程（包括插入和更新）
+        Task<bool> UpdateCourseAsync(IEnumerable<CourseTeacherView> coursesToInsert, IEnumerable<CourseTeacherView> coursesToUpdate);
     }
 }

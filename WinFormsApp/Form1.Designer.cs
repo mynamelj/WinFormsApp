@@ -35,8 +35,8 @@
             tableLayoutPanel4 = new TableLayoutPanel();
             TeacherIdlabel = new Label();
             TeacherNamelabel = new Label();
-            textBox13 = new TextBox();
-            textBox14 = new TextBox();
+            TidtextBox = new TextBox();
+            TnametextBox = new TextBox();
             flowLayoutPanel10 = new FlowLayoutPanel();
             button13 = new Button();
             button14 = new Button();
@@ -68,7 +68,7 @@
             StudentIdtextBox = new TextBox();
             StudentNametextBox = new TextBox();
             StudentBirthdaytextBox = new TextBox();
-            StudentGendertextBox = new TextBox();
+            StudentGendercomboBox = new ComboBox();
             flowLayoutPanel1 = new FlowLayoutPanel();
             StudentAddBtn = new Button();
             StudentUpdateBtn = new Button();
@@ -137,12 +137,13 @@
             ScoreCourseIdlabel = new Label();
             comboBox1 = new ComboBox();
             Scorelabel = new Label();
+            textBox17 = new TextBox();
             flowLayoutPanel12 = new FlowLayoutPanel();
-            button18 = new Button();
             button17 = new Button();
+            button18 = new Button();
             button19 = new Button();
             button20 = new Button();
-            dataGridView4 = new DataGridView();
+            ScoredataGridView = new DataGridView();
             MainLayoutPanel.SuspendLayout();
             flowLayoutPanel8.SuspendLayout();
             tableLayoutPanel4.SuspendLayout();
@@ -172,7 +173,7 @@
             flowLayoutPanel13.SuspendLayout();
             tableLayoutPanel5.SuspendLayout();
             flowLayoutPanel12.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView4).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)ScoredataGridView).BeginInit();
             SuspendLayout();
             // 
             // MainLayoutPanel
@@ -210,7 +211,7 @@
             Teacherlabel.Name = "Teacherlabel";
             Teacherlabel.Size = new Size(44, 17);
             Teacherlabel.TabIndex = 0;
-            Teacherlabel.Text = "课程表";
+            Teacherlabel.Text = "教师表";
             // 
             // tableLayoutPanel4
             // 
@@ -221,8 +222,8 @@
             tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
             tableLayoutPanel4.Controls.Add(TeacherIdlabel, 0, 0);
             tableLayoutPanel4.Controls.Add(TeacherNamelabel, 0, 1);
-            tableLayoutPanel4.Controls.Add(textBox13, 1, 0);
-            tableLayoutPanel4.Controls.Add(textBox14, 1, 1);
+            tableLayoutPanel4.Controls.Add(TidtextBox, 1, 0);
+            tableLayoutPanel4.Controls.Add(TnametextBox, 1, 1);
             tableLayoutPanel4.Location = new Point(3, 40);
             tableLayoutPanel4.Name = "tableLayoutPanel4";
             tableLayoutPanel4.RowCount = 4;
@@ -252,19 +253,19 @@
             TeacherNamelabel.TabIndex = 1;
             TeacherNamelabel.Text = "教师名";
             // 
-            // textBox13
+            // TidtextBox
             // 
-            textBox13.Location = new Point(119, 3);
-            textBox13.Name = "textBox13";
-            textBox13.Size = new Size(100, 23);
-            textBox13.TabIndex = 4;
+            TidtextBox.Location = new Point(119, 3);
+            TidtextBox.Name = "TidtextBox";
+            TidtextBox.Size = new Size(100, 23);
+            TidtextBox.TabIndex = 4;
             // 
-            // textBox14
+            // TnametextBox
             // 
-            textBox14.Location = new Point(119, 31);
-            textBox14.Name = "textBox14";
-            textBox14.Size = new Size(100, 23);
-            textBox14.TabIndex = 5;
+            TnametextBox.Location = new Point(119, 31);
+            TnametextBox.Name = "TnametextBox";
+            TnametextBox.Size = new Size(100, 23);
+            TnametextBox.TabIndex = 5;
             // 
             // flowLayoutPanel10
             // 
@@ -444,6 +445,7 @@
             CourseUpdateBtn.TabIndex = 1;
             CourseUpdateBtn.Text = "保存更改";
             CourseUpdateBtn.UseVisualStyleBackColor = true;
+            CourseUpdateBtn.Click += CourseUpdateBtn_Click;
             // 
             // CourseDeleteBtn
             // 
@@ -510,7 +512,7 @@
             Infobox.Controls.Add(StudentIdtextBox, 1, 0);
             Infobox.Controls.Add(StudentNametextBox, 1, 1);
             Infobox.Controls.Add(StudentBirthdaytextBox, 1, 2);
-            Infobox.Controls.Add(StudentGendertextBox, 1, 3);
+            Infobox.Controls.Add(StudentGendercomboBox, 1, 3);
             Infobox.Location = new Point(3, 40);
             Infobox.Name = "Infobox";
             Infobox.RowCount = 4;
@@ -580,12 +582,14 @@
             StudentBirthdaytextBox.Size = new Size(100, 23);
             StudentBirthdaytextBox.TabIndex = 6;
             // 
-            // StudentGendertextBox
+            // StudentGendercomboBox
             // 
-            StudentGendertextBox.Location = new Point(119, 84);
-            StudentGendertextBox.Name = "StudentGendertextBox";
-            StudentGendertextBox.Size = new Size(100, 23);
-            StudentGendertextBox.TabIndex = 7;
+            StudentGendercomboBox.FormattingEnabled = true;
+            StudentGendercomboBox.Items.AddRange(new object[] { "男", "女", " " });
+            StudentGendercomboBox.Location = new Point(119, 84);
+            StudentGendercomboBox.Name = "StudentGendercomboBox";
+            StudentGendercomboBox.Size = new Size(100, 25);
+            StudentGendercomboBox.TabIndex = 7;
             // 
             // flowLayoutPanel1
             // 
@@ -1152,7 +1156,7 @@
             // flowLayoutPanel11
             // 
             flowLayoutPanel11.Controls.Add(flowLayoutPanel13);
-            flowLayoutPanel11.Controls.Add(dataGridView4);
+            flowLayoutPanel11.Controls.Add(ScoredataGridView);
             flowLayoutPanel11.Location = new Point(2, 427);
             flowLayoutPanel11.Name = "flowLayoutPanel11";
             flowLayoutPanel11.Size = new Size(1416, 248);
@@ -1165,7 +1169,7 @@
             flowLayoutPanel13.Controls.Add(flowLayoutPanel12);
             flowLayoutPanel13.Location = new Point(3, 3);
             flowLayoutPanel13.Name = "flowLayoutPanel13";
-            flowLayoutPanel13.Size = new Size(446, 245);
+            flowLayoutPanel13.Size = new Size(464, 245);
             flowLayoutPanel13.TabIndex = 7;
             // 
             // ScoreTablelabel
@@ -1192,6 +1196,7 @@
             tableLayoutPanel5.Controls.Add(ScoreCourseIdlabel, 0, 2);
             tableLayoutPanel5.Controls.Add(comboBox1, 1, 2);
             tableLayoutPanel5.Controls.Add(Scorelabel, 0, 3);
+            tableLayoutPanel5.Controls.Add(textBox17, 1, 3);
             tableLayoutPanel5.Location = new Point(3, 40);
             tableLayoutPanel5.Name = "tableLayoutPanel5";
             tableLayoutPanel5.RowCount = 4;
@@ -1257,14 +1262,21 @@
             Scorelabel.AutoSize = true;
             Scorelabel.Location = new Point(3, 81);
             Scorelabel.Name = "Scorelabel";
-            Scorelabel.Size = new Size(45, 17);
+            Scorelabel.Size = new Size(32, 17);
             Scorelabel.TabIndex = 8;
-            Scorelabel.Text = "课程ID";
+            Scorelabel.Text = "分数";
+            // 
+            // textBox17
+            // 
+            textBox17.Location = new Point(113, 84);
+            textBox17.Name = "textBox17";
+            textBox17.Size = new Size(100, 23);
+            textBox17.TabIndex = 9;
             // 
             // flowLayoutPanel12
             // 
-            flowLayoutPanel12.Controls.Add(button18);
             flowLayoutPanel12.Controls.Add(button17);
+            flowLayoutPanel12.Controls.Add(button18);
             flowLayoutPanel12.Controls.Add(button19);
             flowLayoutPanel12.Controls.Add(button20);
             flowLayoutPanel12.Location = new Point(3, 158);
@@ -1272,23 +1284,23 @@
             flowLayoutPanel12.Size = new Size(443, 37);
             flowLayoutPanel12.TabIndex = 2;
             // 
-            // button18
-            // 
-            button18.Location = new Point(3, 3);
-            button18.Name = "button18";
-            button18.Size = new Size(75, 30);
-            button18.TabIndex = 1;
-            button18.Text = "保存更改";
-            button18.UseVisualStyleBackColor = true;
-            // 
             // button17
             // 
-            button17.Location = new Point(84, 3);
+            button17.Location = new Point(3, 3);
             button17.Name = "button17";
             button17.Size = new Size(75, 30);
             button17.TabIndex = 0;
             button17.Text = "新增";
             button17.UseVisualStyleBackColor = true;
+            // 
+            // button18
+            // 
+            button18.Location = new Point(84, 3);
+            button18.Name = "button18";
+            button18.Size = new Size(75, 30);
+            button18.TabIndex = 1;
+            button18.Text = "保存更改";
+            button18.UseVisualStyleBackColor = true;
             // 
             // button19
             // 
@@ -1309,13 +1321,14 @@
             button20.Text = "查询";
             button20.UseVisualStyleBackColor = true;
             // 
-            // dataGridView4
+            // ScoredataGridView
             // 
-            dataGridView4.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView4.Location = new Point(455, 3);
-            dataGridView4.Name = "dataGridView4";
-            dataGridView4.Size = new Size(958, 245);
-            dataGridView4.TabIndex = 6;
+            ScoredataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            ScoredataGridView.Location = new Point(473, 3);
+            ScoredataGridView.Margin = new Padding(3, 3, 3, 13);
+            ScoredataGridView.Name = "ScoredataGridView";
+            ScoredataGridView.Size = new Size(940, 240);
+            ScoredataGridView.TabIndex = 6;
             // 
             // Form1
             // 
@@ -1370,7 +1383,7 @@
             tableLayoutPanel5.ResumeLayout(false);
             tableLayoutPanel5.PerformLayout();
             flowLayoutPanel12.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dataGridView4).EndInit();
+            ((System.ComponentModel.ISupportInitialize)ScoredataGridView).EndInit();
             ResumeLayout(false);
 
         }
@@ -1388,7 +1401,6 @@
         private TextBox StudentIdtextBox;
         private TextBox StudentNametextBox;
         private TextBox StudentBirthdaytextBox;
-        private TextBox StudentGendertextBox;
         private FlowLayoutPanel flowLayoutPanel1;
         private Button StudentAddBtn;
         private Button StudentUpdateBtn;
@@ -1466,8 +1478,8 @@
         private TableLayoutPanel tableLayoutPanel4;
         private Label TeacherIdlabel;
         private Label TeacherNamelabel;
-        private TextBox textBox13;
-        private TextBox textBox14;
+        private TextBox TidtextBox;
+        private TextBox TnametextBox;
         private FlowLayoutPanel flowLayoutPanel10;
         private Button button13;
         private Button button14;
@@ -1487,9 +1499,11 @@
         private Button button19;
         private Button button20;
         private Label ScoreTablelabel;
-        private DataGridView dataGridView4;
+        private DataGridView ScoredataGridView;
         private Label ScoreCourseIdlabel;
         private ComboBox comboBox1;
         private Label Scorelabel;
+        private TextBox textBox17;
+        private ComboBox StudentGendercomboBox;
     }
 }
