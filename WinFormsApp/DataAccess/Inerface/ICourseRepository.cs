@@ -13,5 +13,7 @@ namespace WinFormsApp.DataAccess.Inerface
         Task<IEnumerable<CourseTeacherView>> SearchAsync(CourseTeacherView criteria);
         Task<bool> SaveChangesAsync(IEnumerable<CourseTeacherView> studentsToInsert, IEnumerable<CourseTeacherView> studentsToUpdate);
         Task<bool> InsertAsync(Course course); // 插入新课程
+        //删除课程
+        //Task<bool> DeleteAsync(string courseId);
     }
 }

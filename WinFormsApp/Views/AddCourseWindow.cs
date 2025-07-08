@@ -58,7 +58,9 @@ namespace WinFormsApp.Views
                 if (!res)
                     return ;
                 MessageBox.Show("课程添加成功", "成功", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return ;
+                // 关闭窗口
+                this.DialogResult = DialogResult.OK;
+                return;
             }
             catch (Exception ex)
             {

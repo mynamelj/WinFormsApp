@@ -123,7 +123,6 @@ namespace WinFormsApp.Views
             // 
             // Confirm
             // 
-            Confirm.DialogResult = DialogResult.OK;
             Confirm.Location = new Point(50, 3);
             Confirm.Margin = new Padding(50, 3, 3, 3);
             Confirm.Name = "Confirm";

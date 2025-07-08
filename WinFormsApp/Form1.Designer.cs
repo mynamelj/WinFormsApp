@@ -30,6 +30,19 @@
         private void InitializeComponent()
         {
             MainLayoutPanel = new TableLayoutPanel();
+            flowLayoutPanel8 = new FlowLayoutPanel();
+            Teacherlabel = new Label();
+            tableLayoutPanel4 = new TableLayoutPanel();
+            TeacherIdlabel = new Label();
+            TeacherNamelabel = new Label();
+            textBox13 = new TextBox();
+            textBox14 = new TextBox();
+            flowLayoutPanel10 = new FlowLayoutPanel();
+            button13 = new Button();
+            button14 = new Button();
+            button15 = new Button();
+            button16 = new Button();
+            TeacherdataGridView = new DataGridView();
             CourseflowLayoutPanel = new FlowLayoutPanel();
             label16 = new Label();
             CourseInputtableLayoutPanel = new TableLayoutPanel();
@@ -45,57 +58,6 @@
             CourseDeleteBtn = new Button();
             CourseQueryBtn = new Button();
             CoursedataGridView = new DataGridView();
-            flowLayoutPanel10 = new FlowLayoutPanel();
-            label21 = new Label();
-            tableLayoutPanel5 = new TableLayoutPanel();
-            label22 = new Label();
-            label23 = new Label();
-            label24 = new Label();
-            label25 = new Label();
-            textBox17 = new TextBox();
-            textBox18 = new TextBox();
-            textBox19 = new TextBox();
-            textBox20 = new TextBox();
-            flowLayoutPanel11 = new FlowLayoutPanel();
-            button17 = new Button();
-            button18 = new Button();
-            button19 = new Button();
-            button20 = new Button();
-            dataGridView5 = new DataGridView();
-            flowLayoutPanel12 = new FlowLayoutPanel();
-            label26 = new Label();
-            tableLayoutPanel6 = new TableLayoutPanel();
-            label27 = new Label();
-            label28 = new Label();
-            label29 = new Label();
-            label30 = new Label();
-            textBox21 = new TextBox();
-            textBox22 = new TextBox();
-            textBox23 = new TextBox();
-            textBox24 = new TextBox();
-            flowLayoutPanel13 = new FlowLayoutPanel();
-            button21 = new Button();
-            button22 = new Button();
-            button23 = new Button();
-            button24 = new Button();
-            dataGridView6 = new DataGridView();
-            flowLayoutPanel14 = new FlowLayoutPanel();
-            label31 = new Label();
-            tableLayoutPanel7 = new TableLayoutPanel();
-            label32 = new Label();
-            label33 = new Label();
-            label34 = new Label();
-            label35 = new Label();
-            textBox25 = new TextBox();
-            textBox26 = new TextBox();
-            textBox27 = new TextBox();
-            textBox28 = new TextBox();
-            flowLayoutPanel15 = new FlowLayoutPanel();
-            button25 = new Button();
-            button26 = new Button();
-            button27 = new Button();
-            button28 = new Button();
-            dataGridView7 = new DataGridView();
             StudentflowLayoutPanel = new FlowLayoutPanel();
             Tablelabel = new Label();
             Infobox = new TableLayoutPanel();
@@ -164,23 +126,32 @@
             button11 = new Button();
             button12 = new Button();
             dataGridView3 = new DataGridView();
+            flowLayoutPanel11 = new FlowLayoutPanel();
+            flowLayoutPanel13 = new FlowLayoutPanel();
+            ScoreTablelabel = new Label();
+            tableLayoutPanel5 = new TableLayoutPanel();
+            ScoreIdlabel = new Label();
+            ScoreStudentIdlabel = new Label();
+            textBox15 = new TextBox();
+            textBox16 = new TextBox();
+            ScoreCourseIdlabel = new Label();
+            comboBox1 = new ComboBox();
+            Scorelabel = new Label();
+            flowLayoutPanel12 = new FlowLayoutPanel();
+            button18 = new Button();
+            button17 = new Button();
+            button19 = new Button();
+            button20 = new Button();
+            dataGridView4 = new DataGridView();
             MainLayoutPanel.SuspendLayout();
+            flowLayoutPanel8.SuspendLayout();
+            tableLayoutPanel4.SuspendLayout();
+            flowLayoutPanel10.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)TeacherdataGridView).BeginInit();
             CourseflowLayoutPanel.SuspendLayout();
             CourseInputtableLayoutPanel.SuspendLayout();
             flowLayoutPanel9.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)CoursedataGridView).BeginInit();
-            flowLayoutPanel10.SuspendLayout();
-            tableLayoutPanel5.SuspendLayout();
-            flowLayoutPanel11.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView5).BeginInit();
-            flowLayoutPanel12.SuspendLayout();
-            tableLayoutPanel6.SuspendLayout();
-            flowLayoutPanel13.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView6).BeginInit();
-            flowLayoutPanel14.SuspendLayout();
-            tableLayoutPanel7.SuspendLayout();
-            flowLayoutPanel15.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView7).BeginInit();
             StudentflowLayoutPanel.SuspendLayout();
             Infobox.SuspendLayout();
             flowLayoutPanel1.SuspendLayout();
@@ -197,6 +168,11 @@
             tableLayoutPanel3.SuspendLayout();
             flowLayoutPanel7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView3).BeginInit();
+            flowLayoutPanel11.SuspendLayout();
+            flowLayoutPanel13.SuspendLayout();
+            tableLayoutPanel5.SuspendLayout();
+            flowLayoutPanel12.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView4).BeginInit();
             SuspendLayout();
             // 
             // MainLayoutPanel
@@ -205,14 +181,146 @@
             MainLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
             MainLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
             MainLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            MainLayoutPanel.Controls.Add(flowLayoutPanel8, 2, 0);
             MainLayoutPanel.Controls.Add(CourseflowLayoutPanel, 1, 0);
             MainLayoutPanel.Controls.Add(StudentflowLayoutPanel, 0, 0);
             MainLayoutPanel.Location = new Point(-1, 1);
             MainLayoutPanel.Name = "MainLayoutPanel";
             MainLayoutPanel.RowCount = 1;
             MainLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            MainLayoutPanel.Size = new Size(1419, 467);
+            MainLayoutPanel.Size = new Size(1419, 423);
             MainLayoutPanel.TabIndex = 0;
+            // 
+            // flowLayoutPanel8
+            // 
+            flowLayoutPanel8.Controls.Add(Teacherlabel);
+            flowLayoutPanel8.Controls.Add(tableLayoutPanel4);
+            flowLayoutPanel8.Controls.Add(flowLayoutPanel10);
+            flowLayoutPanel8.Controls.Add(TeacherdataGridView);
+            flowLayoutPanel8.Location = new Point(949, 3);
+            flowLayoutPanel8.Name = "flowLayoutPanel8";
+            flowLayoutPanel8.Size = new Size(467, 417);
+            flowLayoutPanel8.TabIndex = 2;
+            // 
+            // Teacherlabel
+            // 
+            Teacherlabel.AutoSize = true;
+            Teacherlabel.Location = new Point(20, 20);
+            Teacherlabel.Margin = new Padding(20, 20, 0, 0);
+            Teacherlabel.Name = "Teacherlabel";
+            Teacherlabel.Size = new Size(44, 17);
+            Teacherlabel.TabIndex = 0;
+            Teacherlabel.Text = "课程表";
+            // 
+            // tableLayoutPanel4
+            // 
+            tableLayoutPanel4.ColumnCount = 4;
+            tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
+            tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
+            tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
+            tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
+            tableLayoutPanel4.Controls.Add(TeacherIdlabel, 0, 0);
+            tableLayoutPanel4.Controls.Add(TeacherNamelabel, 0, 1);
+            tableLayoutPanel4.Controls.Add(textBox13, 1, 0);
+            tableLayoutPanel4.Controls.Add(textBox14, 1, 1);
+            tableLayoutPanel4.Location = new Point(3, 40);
+            tableLayoutPanel4.Name = "tableLayoutPanel4";
+            tableLayoutPanel4.RowCount = 4;
+            tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
+            tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
+            tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Percent, 22F));
+            tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
+            tableLayoutPanel4.Size = new Size(464, 112);
+            tableLayoutPanel4.TabIndex = 1;
+            // 
+            // TeacherIdlabel
+            // 
+            TeacherIdlabel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            TeacherIdlabel.AutoSize = true;
+            TeacherIdlabel.Location = new Point(3, 0);
+            TeacherIdlabel.Name = "TeacherIdlabel";
+            TeacherIdlabel.Size = new Size(110, 28);
+            TeacherIdlabel.TabIndex = 0;
+            TeacherIdlabel.Text = "教师ID";
+            // 
+            // TeacherNamelabel
+            // 
+            TeacherNamelabel.AutoSize = true;
+            TeacherNamelabel.Location = new Point(3, 28);
+            TeacherNamelabel.Name = "TeacherNamelabel";
+            TeacherNamelabel.Size = new Size(44, 17);
+            TeacherNamelabel.TabIndex = 1;
+            TeacherNamelabel.Text = "教师名";
+            // 
+            // textBox13
+            // 
+            textBox13.Location = new Point(119, 3);
+            textBox13.Name = "textBox13";
+            textBox13.Size = new Size(100, 23);
+            textBox13.TabIndex = 4;
+            // 
+            // textBox14
+            // 
+            textBox14.Location = new Point(119, 31);
+            textBox14.Name = "textBox14";
+            textBox14.Size = new Size(100, 23);
+            textBox14.TabIndex = 5;
+            // 
+            // flowLayoutPanel10
+            // 
+            flowLayoutPanel10.Controls.Add(button13);
+            flowLayoutPanel10.Controls.Add(button14);
+            flowLayoutPanel10.Controls.Add(button15);
+            flowLayoutPanel10.Controls.Add(button16);
+            flowLayoutPanel10.Location = new Point(3, 158);
+            flowLayoutPanel10.Name = "flowLayoutPanel10";
+            flowLayoutPanel10.Size = new Size(464, 37);
+            flowLayoutPanel10.TabIndex = 2;
+            // 
+            // button13
+            // 
+            button13.Location = new Point(3, 3);
+            button13.Name = "button13";
+            button13.Size = new Size(75, 30);
+            button13.TabIndex = 0;
+            button13.Text = "新增";
+            button13.UseVisualStyleBackColor = true;
+            // 
+            // button14
+            // 
+            button14.Location = new Point(84, 3);
+            button14.Name = "button14";
+            button14.Size = new Size(75, 30);
+            button14.TabIndex = 1;
+            button14.Text = "保存更改";
+            button14.UseVisualStyleBackColor = true;
+            // 
+            // button15
+            // 
+            button15.Location = new Point(165, 3);
+            button15.Name = "button15";
+            button15.Size = new Size(75, 30);
+            button15.TabIndex = 2;
+            button15.Text = "删除";
+            button15.UseVisualStyleBackColor = true;
+            // 
+            // button16
+            // 
+            button16.Location = new Point(343, 3);
+            button16.Margin = new Padding(100, 3, 3, 3);
+            button16.Name = "button16";
+            button16.Size = new Size(75, 30);
+            button16.TabIndex = 3;
+            button16.Text = "查询";
+            button16.UseVisualStyleBackColor = true;
+            // 
+            // TeacherdataGridView
+            // 
+            TeacherdataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            TeacherdataGridView.Location = new Point(3, 201);
+            TeacherdataGridView.Name = "TeacherdataGridView";
+            TeacherdataGridView.Size = new Size(464, 216);
+            TeacherdataGridView.TabIndex = 6;
             // 
             // CourseflowLayoutPanel
             // 
@@ -220,11 +328,9 @@
             CourseflowLayoutPanel.Controls.Add(CourseInputtableLayoutPanel);
             CourseflowLayoutPanel.Controls.Add(flowLayoutPanel9);
             CourseflowLayoutPanel.Controls.Add(CoursedataGridView);
-            CourseflowLayoutPanel.Controls.Add(flowLayoutPanel10);
-            CourseflowLayoutPanel.Controls.Add(flowLayoutPanel12);
             CourseflowLayoutPanel.Location = new Point(476, 3);
             CourseflowLayoutPanel.Name = "CourseflowLayoutPanel";
-            CourseflowLayoutPanel.Size = new Size(467, 461);
+            CourseflowLayoutPanel.Size = new Size(467, 417);
             CourseflowLayoutPanel.TabIndex = 1;
             // 
             // label16
@@ -364,510 +470,8 @@
             CoursedataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             CoursedataGridView.Location = new Point(3, 201);
             CoursedataGridView.Name = "CoursedataGridView";
-            CoursedataGridView.Size = new Size(464, 260);
-            CoursedataGridView.TabIndex = 3;
-            // 
-            // flowLayoutPanel10
-            // 
-            flowLayoutPanel10.Controls.Add(label21);
-            flowLayoutPanel10.Controls.Add(tableLayoutPanel5);
-            flowLayoutPanel10.Controls.Add(flowLayoutPanel11);
-            flowLayoutPanel10.Controls.Add(dataGridView5);
-            flowLayoutPanel10.Location = new Point(3, 467);
-            flowLayoutPanel10.Name = "flowLayoutPanel10";
-            flowLayoutPanel10.Size = new Size(455, 461);
-            flowLayoutPanel10.TabIndex = 4;
-            // 
-            // label21
-            // 
-            label21.AutoSize = true;
-            label21.Location = new Point(20, 20);
-            label21.Margin = new Padding(20, 20, 0, 0);
-            label21.Name = "label21";
-            label21.Size = new Size(44, 17);
-            label21.TabIndex = 0;
-            label21.Text = "学生表";
-            // 
-            // tableLayoutPanel5
-            // 
-            tableLayoutPanel5.ColumnCount = 4;
-            tableLayoutPanel5.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
-            tableLayoutPanel5.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
-            tableLayoutPanel5.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
-            tableLayoutPanel5.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
-            tableLayoutPanel5.Controls.Add(label22, 0, 0);
-            tableLayoutPanel5.Controls.Add(label23, 0, 1);
-            tableLayoutPanel5.Controls.Add(label24, 0, 2);
-            tableLayoutPanel5.Controls.Add(label25, 0, 3);
-            tableLayoutPanel5.Controls.Add(textBox17, 1, 0);
-            tableLayoutPanel5.Controls.Add(textBox18, 1, 1);
-            tableLayoutPanel5.Controls.Add(textBox19, 1, 2);
-            tableLayoutPanel5.Controls.Add(textBox20, 1, 3);
-            tableLayoutPanel5.Location = new Point(3, 40);
-            tableLayoutPanel5.Name = "tableLayoutPanel5";
-            tableLayoutPanel5.RowCount = 4;
-            tableLayoutPanel5.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
-            tableLayoutPanel5.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
-            tableLayoutPanel5.RowStyles.Add(new RowStyle(SizeType.Percent, 22F));
-            tableLayoutPanel5.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
-            tableLayoutPanel5.Size = new Size(452, 112);
-            tableLayoutPanel5.TabIndex = 1;
-            // 
-            // label22
-            // 
-            label22.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            label22.AutoSize = true;
-            label22.Location = new Point(3, 0);
-            label22.Name = "label22";
-            label22.Size = new Size(107, 28);
-            label22.TabIndex = 0;
-            label22.Text = "ID";
-            // 
-            // label23
-            // 
-            label23.AutoSize = true;
-            label23.Location = new Point(3, 28);
-            label23.Name = "label23";
-            label23.Size = new Size(32, 17);
-            label23.TabIndex = 1;
-            label23.Text = "姓名";
-            // 
-            // label24
-            // 
-            label24.AutoSize = true;
-            label24.Location = new Point(3, 56);
-            label24.Name = "label24";
-            label24.Size = new Size(56, 17);
-            label24.TabIndex = 2;
-            label24.Text = "出生年月";
-            // 
-            // label25
-            // 
-            label25.AutoSize = true;
-            label25.Location = new Point(3, 81);
-            label25.Name = "label25";
-            label25.Size = new Size(32, 17);
-            label25.TabIndex = 3;
-            label25.Text = "性别";
-            // 
-            // textBox17
-            // 
-            textBox17.Location = new Point(116, 3);
-            textBox17.Name = "textBox17";
-            textBox17.Size = new Size(100, 23);
-            textBox17.TabIndex = 4;
-            // 
-            // textBox18
-            // 
-            textBox18.Location = new Point(116, 31);
-            textBox18.Name = "textBox18";
-            textBox18.Size = new Size(100, 23);
-            textBox18.TabIndex = 5;
-            // 
-            // textBox19
-            // 
-            textBox19.Location = new Point(116, 59);
-            textBox19.Name = "textBox19";
-            textBox19.Size = new Size(100, 23);
-            textBox19.TabIndex = 6;
-            // 
-            // textBox20
-            // 
-            textBox20.Location = new Point(116, 84);
-            textBox20.Name = "textBox20";
-            textBox20.Size = new Size(100, 23);
-            textBox20.TabIndex = 7;
-            // 
-            // flowLayoutPanel11
-            // 
-            flowLayoutPanel11.Controls.Add(button17);
-            flowLayoutPanel11.Controls.Add(button18);
-            flowLayoutPanel11.Controls.Add(button19);
-            flowLayoutPanel11.Controls.Add(button20);
-            flowLayoutPanel11.Location = new Point(3, 158);
-            flowLayoutPanel11.Name = "flowLayoutPanel11";
-            flowLayoutPanel11.Size = new Size(452, 37);
-            flowLayoutPanel11.TabIndex = 2;
-            // 
-            // button17
-            // 
-            button17.Location = new Point(3, 3);
-            button17.Name = "button17";
-            button17.Size = new Size(75, 30);
-            button17.TabIndex = 0;
-            button17.Text = "新增";
-            button17.UseVisualStyleBackColor = true;
-            // 
-            // button18
-            // 
-            button18.Location = new Point(84, 3);
-            button18.Name = "button18";
-            button18.Size = new Size(75, 30);
-            button18.TabIndex = 1;
-            button18.Text = "修改";
-            button18.UseVisualStyleBackColor = true;
-            // 
-            // button19
-            // 
-            button19.Location = new Point(165, 3);
-            button19.Name = "button19";
-            button19.Size = new Size(75, 30);
-            button19.TabIndex = 2;
-            button19.Text = "删除";
-            button19.UseVisualStyleBackColor = true;
-            // 
-            // button20
-            // 
-            button20.Location = new Point(343, 3);
-            button20.Margin = new Padding(100, 3, 3, 3);
-            button20.Name = "button20";
-            button20.Size = new Size(75, 30);
-            button20.TabIndex = 3;
-            button20.Text = "查询";
-            button20.UseVisualStyleBackColor = true;
-            // 
-            // dataGridView5
-            // 
-            dataGridView5.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView5.Location = new Point(3, 201);
-            dataGridView5.Name = "dataGridView5";
-            dataGridView5.Size = new Size(452, 260);
-            dataGridView5.TabIndex = 3;
-            // 
-            // flowLayoutPanel12
-            // 
-            flowLayoutPanel12.Controls.Add(label26);
-            flowLayoutPanel12.Controls.Add(tableLayoutPanel6);
-            flowLayoutPanel12.Controls.Add(flowLayoutPanel13);
-            flowLayoutPanel12.Controls.Add(dataGridView6);
-            flowLayoutPanel12.Controls.Add(flowLayoutPanel14);
-            flowLayoutPanel12.Location = new Point(3, 934);
-            flowLayoutPanel12.Name = "flowLayoutPanel12";
-            flowLayoutPanel12.Size = new Size(455, 461);
-            flowLayoutPanel12.TabIndex = 5;
-            // 
-            // label26
-            // 
-            label26.AutoSize = true;
-            label26.Location = new Point(20, 20);
-            label26.Margin = new Padding(20, 20, 0, 0);
-            label26.Name = "label26";
-            label26.Size = new Size(44, 17);
-            label26.TabIndex = 0;
-            label26.Text = "学生表";
-            // 
-            // tableLayoutPanel6
-            // 
-            tableLayoutPanel6.ColumnCount = 4;
-            tableLayoutPanel6.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
-            tableLayoutPanel6.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
-            tableLayoutPanel6.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
-            tableLayoutPanel6.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
-            tableLayoutPanel6.Controls.Add(label27, 0, 0);
-            tableLayoutPanel6.Controls.Add(label28, 0, 1);
-            tableLayoutPanel6.Controls.Add(label29, 0, 2);
-            tableLayoutPanel6.Controls.Add(label30, 0, 3);
-            tableLayoutPanel6.Controls.Add(textBox21, 1, 0);
-            tableLayoutPanel6.Controls.Add(textBox22, 1, 1);
-            tableLayoutPanel6.Controls.Add(textBox23, 1, 2);
-            tableLayoutPanel6.Controls.Add(textBox24, 1, 3);
-            tableLayoutPanel6.Location = new Point(3, 40);
-            tableLayoutPanel6.Name = "tableLayoutPanel6";
-            tableLayoutPanel6.RowCount = 4;
-            tableLayoutPanel6.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
-            tableLayoutPanel6.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
-            tableLayoutPanel6.RowStyles.Add(new RowStyle(SizeType.Percent, 22F));
-            tableLayoutPanel6.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
-            tableLayoutPanel6.Size = new Size(452, 112);
-            tableLayoutPanel6.TabIndex = 1;
-            // 
-            // label27
-            // 
-            label27.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            label27.AutoSize = true;
-            label27.Location = new Point(3, 0);
-            label27.Name = "label27";
-            label27.Size = new Size(107, 28);
-            label27.TabIndex = 0;
-            label27.Text = "ID";
-            // 
-            // label28
-            // 
-            label28.AutoSize = true;
-            label28.Location = new Point(3, 28);
-            label28.Name = "label28";
-            label28.Size = new Size(32, 17);
-            label28.TabIndex = 1;
-            label28.Text = "姓名";
-            // 
-            // label29
-            // 
-            label29.AutoSize = true;
-            label29.Location = new Point(3, 56);
-            label29.Name = "label29";
-            label29.Size = new Size(56, 17);
-            label29.TabIndex = 2;
-            label29.Text = "出生年月";
-            // 
-            // label30
-            // 
-            label30.AutoSize = true;
-            label30.Location = new Point(3, 81);
-            label30.Name = "label30";
-            label30.Size = new Size(32, 17);
-            label30.TabIndex = 3;
-            label30.Text = "性别";
-            // 
-            // textBox21
-            // 
-            textBox21.Location = new Point(116, 3);
-            textBox21.Name = "textBox21";
-            textBox21.Size = new Size(100, 23);
-            textBox21.TabIndex = 4;
-            // 
-            // textBox22
-            // 
-            textBox22.Location = new Point(116, 31);
-            textBox22.Name = "textBox22";
-            textBox22.Size = new Size(100, 23);
-            textBox22.TabIndex = 5;
-            // 
-            // textBox23
-            // 
-            textBox23.Location = new Point(116, 59);
-            textBox23.Name = "textBox23";
-            textBox23.Size = new Size(100, 23);
-            textBox23.TabIndex = 6;
-            // 
-            // textBox24
-            // 
-            textBox24.Location = new Point(116, 84);
-            textBox24.Name = "textBox24";
-            textBox24.Size = new Size(100, 23);
-            textBox24.TabIndex = 7;
-            // 
-            // flowLayoutPanel13
-            // 
-            flowLayoutPanel13.Controls.Add(button21);
-            flowLayoutPanel13.Controls.Add(button22);
-            flowLayoutPanel13.Controls.Add(button23);
-            flowLayoutPanel13.Controls.Add(button24);
-            flowLayoutPanel13.Location = new Point(3, 158);
-            flowLayoutPanel13.Name = "flowLayoutPanel13";
-            flowLayoutPanel13.Size = new Size(452, 37);
-            flowLayoutPanel13.TabIndex = 2;
-            // 
-            // button21
-            // 
-            button21.Location = new Point(3, 3);
-            button21.Name = "button21";
-            button21.Size = new Size(75, 30);
-            button21.TabIndex = 0;
-            button21.Text = "新增";
-            button21.UseVisualStyleBackColor = true;
-            // 
-            // button22
-            // 
-            button22.Location = new Point(84, 3);
-            button22.Name = "button22";
-            button22.Size = new Size(75, 30);
-            button22.TabIndex = 1;
-            button22.Text = "修改";
-            button22.UseVisualStyleBackColor = true;
-            // 
-            // button23
-            // 
-            button23.Location = new Point(165, 3);
-            button23.Name = "button23";
-            button23.Size = new Size(75, 30);
-            button23.TabIndex = 2;
-            button23.Text = "删除";
-            button23.UseVisualStyleBackColor = true;
-            // 
-            // button24
-            // 
-            button24.Location = new Point(343, 3);
-            button24.Margin = new Padding(100, 3, 3, 3);
-            button24.Name = "button24";
-            button24.Size = new Size(75, 30);
-            button24.TabIndex = 3;
-            button24.Text = "查询";
-            button24.UseVisualStyleBackColor = true;
-            // 
-            // dataGridView6
-            // 
-            dataGridView6.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView6.Location = new Point(3, 201);
-            dataGridView6.Name = "dataGridView6";
-            dataGridView6.Size = new Size(452, 260);
-            dataGridView6.TabIndex = 3;
-            // 
-            // flowLayoutPanel14
-            // 
-            flowLayoutPanel14.Controls.Add(label31);
-            flowLayoutPanel14.Controls.Add(tableLayoutPanel7);
-            flowLayoutPanel14.Controls.Add(flowLayoutPanel15);
-            flowLayoutPanel14.Controls.Add(dataGridView7);
-            flowLayoutPanel14.Location = new Point(3, 467);
-            flowLayoutPanel14.Name = "flowLayoutPanel14";
-            flowLayoutPanel14.Size = new Size(455, 461);
-            flowLayoutPanel14.TabIndex = 4;
-            // 
-            // label31
-            // 
-            label31.AutoSize = true;
-            label31.Location = new Point(20, 20);
-            label31.Margin = new Padding(20, 20, 0, 0);
-            label31.Name = "label31";
-            label31.Size = new Size(44, 17);
-            label31.TabIndex = 0;
-            label31.Text = "学生表";
-            // 
-            // tableLayoutPanel7
-            // 
-            tableLayoutPanel7.ColumnCount = 4;
-            tableLayoutPanel7.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
-            tableLayoutPanel7.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
-            tableLayoutPanel7.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
-            tableLayoutPanel7.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
-            tableLayoutPanel7.Controls.Add(label32, 0, 0);
-            tableLayoutPanel7.Controls.Add(label33, 0, 1);
-            tableLayoutPanel7.Controls.Add(label34, 0, 2);
-            tableLayoutPanel7.Controls.Add(label35, 0, 3);
-            tableLayoutPanel7.Controls.Add(textBox25, 1, 0);
-            tableLayoutPanel7.Controls.Add(textBox26, 1, 1);
-            tableLayoutPanel7.Controls.Add(textBox27, 1, 2);
-            tableLayoutPanel7.Controls.Add(textBox28, 1, 3);
-            tableLayoutPanel7.Location = new Point(3, 40);
-            tableLayoutPanel7.Name = "tableLayoutPanel7";
-            tableLayoutPanel7.RowCount = 4;
-            tableLayoutPanel7.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
-            tableLayoutPanel7.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
-            tableLayoutPanel7.RowStyles.Add(new RowStyle(SizeType.Percent, 22F));
-            tableLayoutPanel7.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
-            tableLayoutPanel7.Size = new Size(452, 112);
-            tableLayoutPanel7.TabIndex = 1;
-            // 
-            // label32
-            // 
-            label32.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            label32.AutoSize = true;
-            label32.Location = new Point(3, 0);
-            label32.Name = "label32";
-            label32.Size = new Size(107, 28);
-            label32.TabIndex = 0;
-            label32.Text = "ID";
-            // 
-            // label33
-            // 
-            label33.AutoSize = true;
-            label33.Location = new Point(3, 28);
-            label33.Name = "label33";
-            label33.Size = new Size(32, 17);
-            label33.TabIndex = 1;
-            label33.Text = "姓名";
-            // 
-            // label34
-            // 
-            label34.AutoSize = true;
-            label34.Location = new Point(3, 56);
-            label34.Name = "label34";
-            label34.Size = new Size(56, 17);
-            label34.TabIndex = 2;
-            label34.Text = "出生年月";
-            // 
-            // label35
-            // 
-            label35.AutoSize = true;
-            label35.Location = new Point(3, 81);
-            label35.Name = "label35";
-            label35.Size = new Size(32, 17);
-            label35.TabIndex = 3;
-            label35.Text = "性别";
-            // 
-            // textBox25
-            // 
-            textBox25.Location = new Point(116, 3);
-            textBox25.Name = "textBox25";
-            textBox25.Size = new Size(100, 23);
-            textBox25.TabIndex = 4;
-            // 
-            // textBox26
-            // 
-            textBox26.Location = new Point(116, 31);
-            textBox26.Name = "textBox26";
-            textBox26.Size = new Size(100, 23);
-            textBox26.TabIndex = 5;
-            // 
-            // textBox27
-            // 
-            textBox27.Location = new Point(116, 59);
-            textBox27.Name = "textBox27";
-            textBox27.Size = new Size(100, 23);
-            textBox27.TabIndex = 6;
-            // 
-            // textBox28
-            // 
-            textBox28.Location = new Point(116, 84);
-            textBox28.Name = "textBox28";
-            textBox28.Size = new Size(100, 23);
-            textBox28.TabIndex = 7;
-            // 
-            // flowLayoutPanel15
-            // 
-            flowLayoutPanel15.Controls.Add(button25);
-            flowLayoutPanel15.Controls.Add(button26);
-            flowLayoutPanel15.Controls.Add(button27);
-            flowLayoutPanel15.Controls.Add(button28);
-            flowLayoutPanel15.Location = new Point(3, 158);
-            flowLayoutPanel15.Name = "flowLayoutPanel15";
-            flowLayoutPanel15.Size = new Size(452, 37);
-            flowLayoutPanel15.TabIndex = 2;
-            // 
-            // button25
-            // 
-            button25.Location = new Point(3, 3);
-            button25.Name = "button25";
-            button25.Size = new Size(75, 30);
-            button25.TabIndex = 0;
-            button25.Text = "新增";
-            button25.UseVisualStyleBackColor = true;
-            // 
-            // button26
-            // 
-            button26.Location = new Point(84, 3);
-            button26.Name = "button26";
-            button26.Size = new Size(75, 30);
-            button26.TabIndex = 1;
-            button26.Text = "修改";
-            button26.UseVisualStyleBackColor = true;
-            // 
-            // button27
-            // 
-            button27.Location = new Point(165, 3);
-            button27.Name = "button27";
-            button27.Size = new Size(75, 30);
-            button27.TabIndex = 2;
-            button27.Text = "删除";
-            button27.UseVisualStyleBackColor = true;
-            // 
-            // button28
-            // 
-            button28.Location = new Point(343, 3);
-            button28.Margin = new Padding(100, 3, 3, 3);
-            button28.Name = "button28";
-            button28.Size = new Size(75, 30);
-            button28.TabIndex = 3;
-            button28.Text = "查询";
-            button28.UseVisualStyleBackColor = true;
-            // 
-            // dataGridView7
-            // 
-            dataGridView7.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView7.Location = new Point(3, 201);
-            dataGridView7.Name = "dataGridView7";
-            dataGridView7.Size = new Size(452, 260);
-            dataGridView7.TabIndex = 3;
+            CoursedataGridView.Size = new Size(464, 216);
+            CoursedataGridView.TabIndex = 6;
             // 
             // StudentflowLayoutPanel
             // 
@@ -879,7 +483,7 @@
             StudentflowLayoutPanel.Controls.Add(flowLayoutPanel4);
             StudentflowLayoutPanel.Location = new Point(3, 3);
             StudentflowLayoutPanel.Name = "StudentflowLayoutPanel";
-            StudentflowLayoutPanel.Size = new Size(467, 461);
+            StudentflowLayoutPanel.Size = new Size(467, 417);
             StudentflowLayoutPanel.TabIndex = 0;
             // 
             // Tablelabel
@@ -1040,7 +644,7 @@
             StudentDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             StudentDataGridView.Location = new Point(3, 201);
             StudentDataGridView.Name = "StudentDataGridView";
-            StudentDataGridView.Size = new Size(464, 260);
+            StudentDataGridView.Size = new Size(464, 216);
             StudentDataGridView.TabIndex = 3;
             // 
             // flowLayoutPanel2
@@ -1049,7 +653,7 @@
             flowLayoutPanel2.Controls.Add(tableLayoutPanel1);
             flowLayoutPanel2.Controls.Add(flowLayoutPanel3);
             flowLayoutPanel2.Controls.Add(dataGridView1);
-            flowLayoutPanel2.Location = new Point(3, 467);
+            flowLayoutPanel2.Location = new Point(3, 423);
             flowLayoutPanel2.Name = "flowLayoutPanel2";
             flowLayoutPanel2.Size = new Size(455, 461);
             flowLayoutPanel2.TabIndex = 4;
@@ -1217,7 +821,7 @@
             flowLayoutPanel4.Controls.Add(flowLayoutPanel5);
             flowLayoutPanel4.Controls.Add(dataGridView2);
             flowLayoutPanel4.Controls.Add(flowLayoutPanel6);
-            flowLayoutPanel4.Location = new Point(3, 934);
+            flowLayoutPanel4.Location = new Point(3, 890);
             flowLayoutPanel4.Name = "flowLayoutPanel4";
             flowLayoutPanel4.Size = new Size(455, 461);
             flowLayoutPanel4.TabIndex = 5;
@@ -1545,40 +1149,197 @@
             dataGridView3.Size = new Size(452, 260);
             dataGridView3.TabIndex = 3;
             // 
+            // flowLayoutPanel11
+            // 
+            flowLayoutPanel11.Controls.Add(flowLayoutPanel13);
+            flowLayoutPanel11.Controls.Add(dataGridView4);
+            flowLayoutPanel11.Location = new Point(2, 427);
+            flowLayoutPanel11.Name = "flowLayoutPanel11";
+            flowLayoutPanel11.Size = new Size(1416, 248);
+            flowLayoutPanel11.TabIndex = 3;
+            // 
+            // flowLayoutPanel13
+            // 
+            flowLayoutPanel13.Controls.Add(ScoreTablelabel);
+            flowLayoutPanel13.Controls.Add(tableLayoutPanel5);
+            flowLayoutPanel13.Controls.Add(flowLayoutPanel12);
+            flowLayoutPanel13.Location = new Point(3, 3);
+            flowLayoutPanel13.Name = "flowLayoutPanel13";
+            flowLayoutPanel13.Size = new Size(446, 245);
+            flowLayoutPanel13.TabIndex = 7;
+            // 
+            // ScoreTablelabel
+            // 
+            ScoreTablelabel.AutoSize = true;
+            ScoreTablelabel.Location = new Point(20, 20);
+            ScoreTablelabel.Margin = new Padding(20, 20, 0, 0);
+            ScoreTablelabel.Name = "ScoreTablelabel";
+            ScoreTablelabel.Size = new Size(44, 17);
+            ScoreTablelabel.TabIndex = 0;
+            ScoreTablelabel.Text = "成绩表";
+            // 
+            // tableLayoutPanel5
+            // 
+            tableLayoutPanel5.ColumnCount = 4;
+            tableLayoutPanel5.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
+            tableLayoutPanel5.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
+            tableLayoutPanel5.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
+            tableLayoutPanel5.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
+            tableLayoutPanel5.Controls.Add(ScoreIdlabel, 0, 0);
+            tableLayoutPanel5.Controls.Add(ScoreStudentIdlabel, 0, 1);
+            tableLayoutPanel5.Controls.Add(textBox15, 1, 0);
+            tableLayoutPanel5.Controls.Add(textBox16, 1, 1);
+            tableLayoutPanel5.Controls.Add(ScoreCourseIdlabel, 0, 2);
+            tableLayoutPanel5.Controls.Add(comboBox1, 1, 2);
+            tableLayoutPanel5.Controls.Add(Scorelabel, 0, 3);
+            tableLayoutPanel5.Location = new Point(3, 40);
+            tableLayoutPanel5.Name = "tableLayoutPanel5";
+            tableLayoutPanel5.RowCount = 4;
+            tableLayoutPanel5.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
+            tableLayoutPanel5.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
+            tableLayoutPanel5.RowStyles.Add(new RowStyle(SizeType.Percent, 22F));
+            tableLayoutPanel5.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
+            tableLayoutPanel5.Size = new Size(443, 112);
+            tableLayoutPanel5.TabIndex = 1;
+            // 
+            // ScoreIdlabel
+            // 
+            ScoreIdlabel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            ScoreIdlabel.AutoSize = true;
+            ScoreIdlabel.Location = new Point(3, 0);
+            ScoreIdlabel.Name = "ScoreIdlabel";
+            ScoreIdlabel.Size = new Size(104, 28);
+            ScoreIdlabel.TabIndex = 0;
+            ScoreIdlabel.Text = "ID";
+            // 
+            // ScoreStudentIdlabel
+            // 
+            ScoreStudentIdlabel.AutoSize = true;
+            ScoreStudentIdlabel.Location = new Point(3, 28);
+            ScoreStudentIdlabel.Name = "ScoreStudentIdlabel";
+            ScoreStudentIdlabel.Size = new Size(45, 17);
+            ScoreStudentIdlabel.TabIndex = 1;
+            ScoreStudentIdlabel.Text = "学生ID";
+            // 
+            // textBox15
+            // 
+            textBox15.Location = new Point(113, 3);
+            textBox15.Name = "textBox15";
+            textBox15.Size = new Size(100, 23);
+            textBox15.TabIndex = 4;
+            // 
+            // textBox16
+            // 
+            textBox16.Location = new Point(113, 31);
+            textBox16.Name = "textBox16";
+            textBox16.Size = new Size(100, 23);
+            textBox16.TabIndex = 5;
+            // 
+            // ScoreCourseIdlabel
+            // 
+            ScoreCourseIdlabel.AutoSize = true;
+            ScoreCourseIdlabel.Location = new Point(3, 56);
+            ScoreCourseIdlabel.Name = "ScoreCourseIdlabel";
+            ScoreCourseIdlabel.Size = new Size(45, 17);
+            ScoreCourseIdlabel.TabIndex = 6;
+            ScoreCourseIdlabel.Text = "课程ID";
+            // 
+            // comboBox1
+            // 
+            comboBox1.FormattingEnabled = true;
+            comboBox1.Location = new Point(113, 59);
+            comboBox1.Name = "comboBox1";
+            comboBox1.Size = new Size(100, 25);
+            comboBox1.TabIndex = 7;
+            // 
+            // Scorelabel
+            // 
+            Scorelabel.AutoSize = true;
+            Scorelabel.Location = new Point(3, 81);
+            Scorelabel.Name = "Scorelabel";
+            Scorelabel.Size = new Size(45, 17);
+            Scorelabel.TabIndex = 8;
+            Scorelabel.Text = "课程ID";
+            // 
+            // flowLayoutPanel12
+            // 
+            flowLayoutPanel12.Controls.Add(button18);
+            flowLayoutPanel12.Controls.Add(button17);
+            flowLayoutPanel12.Controls.Add(button19);
+            flowLayoutPanel12.Controls.Add(button20);
+            flowLayoutPanel12.Location = new Point(3, 158);
+            flowLayoutPanel12.Name = "flowLayoutPanel12";
+            flowLayoutPanel12.Size = new Size(443, 37);
+            flowLayoutPanel12.TabIndex = 2;
+            // 
+            // button18
+            // 
+            button18.Location = new Point(3, 3);
+            button18.Name = "button18";
+            button18.Size = new Size(75, 30);
+            button18.TabIndex = 1;
+            button18.Text = "保存更改";
+            button18.UseVisualStyleBackColor = true;
+            // 
+            // button17
+            // 
+            button17.Location = new Point(84, 3);
+            button17.Name = "button17";
+            button17.Size = new Size(75, 30);
+            button17.TabIndex = 0;
+            button17.Text = "新增";
+            button17.UseVisualStyleBackColor = true;
+            // 
+            // button19
+            // 
+            button19.Location = new Point(165, 3);
+            button19.Name = "button19";
+            button19.Size = new Size(75, 30);
+            button19.TabIndex = 2;
+            button19.Text = "删除";
+            button19.UseVisualStyleBackColor = true;
+            // 
+            // button20
+            // 
+            button20.Location = new Point(343, 3);
+            button20.Margin = new Padding(100, 3, 3, 3);
+            button20.Name = "button20";
+            button20.Size = new Size(75, 30);
+            button20.TabIndex = 3;
+            button20.Text = "查询";
+            button20.UseVisualStyleBackColor = true;
+            // 
+            // dataGridView4
+            // 
+            dataGridView4.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView4.Location = new Point(455, 3);
+            dataGridView4.Name = "dataGridView4";
+            dataGridView4.Size = new Size(958, 245);
+            dataGridView4.TabIndex = 6;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Control;
             ClientSize = new Size(1420, 674);
+            Controls.Add(flowLayoutPanel11);
             Controls.Add(MainLayoutPanel);
             Name = "Form1";
             Text = "学生信息查询";
             MainLayoutPanel.ResumeLayout(false);
+            flowLayoutPanel8.ResumeLayout(false);
+            flowLayoutPanel8.PerformLayout();
+            tableLayoutPanel4.ResumeLayout(false);
+            tableLayoutPanel4.PerformLayout();
+            flowLayoutPanel10.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)TeacherdataGridView).EndInit();
             CourseflowLayoutPanel.ResumeLayout(false);
             CourseflowLayoutPanel.PerformLayout();
             CourseInputtableLayoutPanel.ResumeLayout(false);
             CourseInputtableLayoutPanel.PerformLayout();
             flowLayoutPanel9.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)CoursedataGridView).EndInit();
-            flowLayoutPanel10.ResumeLayout(false);
-            flowLayoutPanel10.PerformLayout();
-            tableLayoutPanel5.ResumeLayout(false);
-            tableLayoutPanel5.PerformLayout();
-            flowLayoutPanel11.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dataGridView5).EndInit();
-            flowLayoutPanel12.ResumeLayout(false);
-            flowLayoutPanel12.PerformLayout();
-            tableLayoutPanel6.ResumeLayout(false);
-            tableLayoutPanel6.PerformLayout();
-            flowLayoutPanel13.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dataGridView6).EndInit();
-            flowLayoutPanel14.ResumeLayout(false);
-            flowLayoutPanel14.PerformLayout();
-            tableLayoutPanel7.ResumeLayout(false);
-            tableLayoutPanel7.PerformLayout();
-            flowLayoutPanel15.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dataGridView7).EndInit();
             StudentflowLayoutPanel.ResumeLayout(false);
             StudentflowLayoutPanel.PerformLayout();
             Infobox.ResumeLayout(false);
@@ -1603,6 +1364,13 @@
             tableLayoutPanel3.PerformLayout();
             flowLayoutPanel7.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dataGridView3).EndInit();
+            flowLayoutPanel11.ResumeLayout(false);
+            flowLayoutPanel13.ResumeLayout(false);
+            flowLayoutPanel13.PerformLayout();
+            tableLayoutPanel5.ResumeLayout(false);
+            tableLayoutPanel5.PerformLayout();
+            flowLayoutPanel12.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dataGridView4).EndInit();
             ResumeLayout(false);
 
         }
@@ -1640,58 +1408,6 @@
         private Button CourseUpdateBtn;
         private Button CourseDeleteBtn;
         private Button CourseQueryBtn;
-        private DataGridView CoursedataGridView;
-        private FlowLayoutPanel flowLayoutPanel10;
-        private Label label21;
-        private TableLayoutPanel tableLayoutPanel5;
-        private Label label22;
-        private Label label23;
-        private Label label24;
-        private Label label25;
-        private TextBox textBox17;
-        private TextBox textBox18;
-        private TextBox textBox19;
-        private TextBox textBox20;
-        private FlowLayoutPanel flowLayoutPanel11;
-        private Button button17;
-        private Button button18;
-        private Button button19;
-        private Button button20;
-        private DataGridView dataGridView5;
-        private FlowLayoutPanel flowLayoutPanel12;
-        private Label label26;
-        private TableLayoutPanel tableLayoutPanel6;
-        private Label label27;
-        private Label label28;
-        private Label label29;
-        private Label label30;
-        private TextBox textBox21;
-        private TextBox textBox22;
-        private TextBox textBox23;
-        private TextBox textBox24;
-        private FlowLayoutPanel flowLayoutPanel13;
-        private Button button21;
-        private Button button22;
-        private Button button23;
-        private Button button24;
-        private DataGridView dataGridView6;
-        private FlowLayoutPanel flowLayoutPanel14;
-        private Label label31;
-        private TableLayoutPanel tableLayoutPanel7;
-        private Label label32;
-        private Label label33;
-        private Label label34;
-        private Label label35;
-        private TextBox textBox25;
-        private TextBox textBox26;
-        private TextBox textBox27;
-        private TextBox textBox28;
-        private FlowLayoutPanel flowLayoutPanel15;
-        private Button button25;
-        private Button button26;
-        private Button button27;
-        private Button button28;
-        private DataGridView dataGridView7;
         private FlowLayoutPanel flowLayoutPanel2;
         private Label label1;
         private TableLayoutPanel tableLayoutPanel1;
@@ -1744,5 +1460,36 @@
         private Button button12;
         private DataGridView dataGridView3;
         public DataGridView StudentDataGridView;
+        private DataGridView CoursedataGridView;
+        private FlowLayoutPanel flowLayoutPanel8;
+        private Label Teacherlabel;
+        private TableLayoutPanel tableLayoutPanel4;
+        private Label TeacherIdlabel;
+        private Label TeacherNamelabel;
+        private TextBox textBox13;
+        private TextBox textBox14;
+        private FlowLayoutPanel flowLayoutPanel10;
+        private Button button13;
+        private Button button14;
+        private Button button15;
+        private Button button16;
+        private DataGridView TeacherdataGridView;
+        private FlowLayoutPanel flowLayoutPanel11;
+        private FlowLayoutPanel flowLayoutPanel13;
+        private TableLayoutPanel tableLayoutPanel5;
+        private Label ScoreIdlabel;
+        private Label ScoreStudentIdlabel;
+        private TextBox textBox15;
+        private TextBox textBox16;
+        private FlowLayoutPanel flowLayoutPanel12;
+        private Button button18;
+        private Button button17;
+        private Button button19;
+        private Button button20;
+        private Label ScoreTablelabel;
+        private DataGridView dataGridView4;
+        private Label ScoreCourseIdlabel;
+        private ComboBox comboBox1;
+        private Label Scorelabel;
     }
 }
