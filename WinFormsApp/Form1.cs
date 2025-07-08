@@ -37,6 +37,21 @@ namespace WinFormsApp
             _courseService = courseService;
         }
 
+        private  async Task LoadStudentsAsync()
+        {
+
+            var allStudents = await _studentService.GetStudentAllAsync();
+            students = new BindingList<Student>(allStudents.ToList());
+            students.ListChanged += Students_ListChanged; // 订阅 ListChanged 事件
+            StudentDataGridView.DataSource = students;
+            // 如果需要，可以设置DataGridView的列标题等属性
+            StudentDataGridView.Columns["sid"].HeaderText = "学生ID";
+            StudentDataGridView.Columns["sname"].HeaderText = "学生姓名";
+            StudentDataGridView.Columns["sage"].HeaderText = "出生年月";
+            StudentDataGridView.Columns["ssex"].HeaderText = "性别";
+
+        }
+
         private async void StudentQueryBtn_Click(object sender, EventArgs e)
         {
             var criteria = new Student
@@ -148,7 +163,7 @@ namespace WinFormsApp
                     // 操作成功后，清空两个跟踪集合
                     newStudents.Clear();
                     modifiedStudents.Clear();
-
+                    await LoadStudentsAsync();
                     // （可选但推荐）重新加载数据，以获取新插入记录的自增ID
                     // await LoadStudentsAsync(); 
                 }

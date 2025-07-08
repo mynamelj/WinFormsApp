@@ -31,17 +31,17 @@ namespace WinFormsApp.DataAccess
         /// 
 
 
-        public async Task<Student> GetByIdAsync(string id)
+        public async Task<IEnumerable<Student>> GetAllAsync()
         {
             using (var connection = DbConnectionFactory.GetConnection())
             {
                 // SQL查询语句，使用 @Id 作为参数占位符
-                string sql = "SELECT sid, sname, sage, ssex FROM student WHERE sid = @Id";
+                string sql = "SELECT sid, sname, sage, ssex FROM student";
 
                 // 使用Dapper的 QueryFirstOrDefaultAsync 方法
                 // 它会返回查询到的第一条记录，如果没有找到则返回 null
                 // 第二个参数是一个匿名对象，其属性名(@后面的部分)应与SQL中的参数名匹配
-                var student = await connection.QueryFirstOrDefaultAsync<Student>(sql, new { Id = id });
+                var student = await connection.QueryAsync<Student>(sql);
                 return student;
             }
         }

@@ -41,14 +41,10 @@ namespace WinFormsApp.Services
         /// </summary>
         /// <returns>学生列表</returns>
 
-        public async Task<Student> GetStudentByIdAsync(string id)
+        public async Task<IEnumerable<Student>> GetStudentAllAsync()
         {
-            if (string.IsNullOrWhiteSpace(id))
-            {
-                // 或者抛出异常
-                return null;
-            }
-            return await _studentRepository.GetByIdAsync(id);
+
+            return await _studentRepository.GetAllAsync();
         }
 
         public async Task<bool> InsertStudentAsync(Student student)
