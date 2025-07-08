@@ -566,7 +566,6 @@
             StudentIdtextBox.Name = "StudentIdtextBox";
             StudentIdtextBox.Size = new Size(100, 23);
             StudentIdtextBox.TabIndex = 4;
-            StudentIdtextBox.TextChanged += StudentIdTextChanged;
             // 
             // StudentNametextBox
             // 
@@ -628,7 +627,7 @@
             StudentDeleteBtn.Name = "StudentDeleteBtn";
             StudentDeleteBtn.Size = new Size(75, 30);
             StudentDeleteBtn.TabIndex = 2;
-            StudentDeleteBtn.Text = "删除";
+            StudentDeleteBtn.Text = "删除选中";
             StudentDeleteBtn.UseVisualStyleBackColor = true;
             StudentDeleteBtn.Click += StudentDeleteBtn_Click;
             // 
@@ -641,7 +640,6 @@
             StudentQueryBtn.TabIndex = 3;
             StudentQueryBtn.Text = "查询";
             StudentQueryBtn.UseVisualStyleBackColor = true;
-            StudentQueryBtn.Click += StudentQueryBtn_Click;
             // 
             // StudentDataGridView
             // 

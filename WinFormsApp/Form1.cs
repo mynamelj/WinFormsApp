@@ -8,10 +8,12 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
 using WinFormsApp.DataAccess;
+using WinFormsApp.DataAccess.Inerface;
 using WinFormsApp.Models;
 using WinFormsApp.Models.DTO;
 using WinFormsApp.Services;
 using WinFormsApp.Services.Interface;
+using WinFormsApp.Utils;
 using WinFormsApp.Views; // 引入服务层命名空间
 
 namespace WinFormsApp
@@ -23,7 +25,7 @@ namespace WinFormsApp
         private readonly IStudentService _studentService;
         private readonly ICourseService _courseService;
         [Required]
-        private BindingList<Student> students;
+        private BindingList<Student> students=new BindingList<Student>();
         private BindingList<CourseTeacherView> courses;
         // 用于跟踪修改的学生
         private HashSet<Student> modifiedStudents = new HashSet<Student>();
@@ -38,8 +40,24 @@ namespace WinFormsApp
             InitializeComponent();
             _studentService = studentService; // DI容器会自动提供实例
             _courseService = courseService;
+            StudentGendercomboBox.SelectedIndex = 2;
+            // 默认选择第一个选项
+            var checkColumn = new SelectCheckBoxColumn();
+            if (!StudentDataGridView.Columns.Contains("colCheck"))
+            {
+                StudentDataGridView.Columns.Insert(0, checkColumn);
+            }
+            StudentDataGridView.DataSource = students;
+            // 如果需要，可以设置DataGridView的列标题等属性
+            StudentDataGridView.Columns["sid"].HeaderText = "学生ID";
+            StudentDataGridView.Columns["sname"].HeaderText = "学生姓名";
+            StudentDataGridView.Columns["sage"].HeaderText = "出生年月";
+            StudentDataGridView.Columns["ssex"].HeaderText = "性别";
         }
 
+
+        //  ListChanged 事件的处理程序,监听学生列表的变化
+        #region Student控件的事件处理
         private async Task LoadStudentsAsync()
         {
 
@@ -47,15 +65,58 @@ namespace WinFormsApp
             students = new BindingList<Student>(allStudents.ToList());
             students.ListChanged += Students_ListChanged; // 订阅 ListChanged 事件
             StudentDataGridView.DataSource = students;
-            // 如果需要，可以设置DataGridView的列标题等属性
-            StudentDataGridView.Columns["sid"].HeaderText = "学生ID";
-            StudentDataGridView.Columns["sname"].HeaderText = "学生姓名";
-            StudentDataGridView.Columns["sage"].HeaderText = "出生年月";
-            StudentDataGridView.Columns["ssex"].HeaderText = "性别";
 
         }
+        private async void StudentDeleteBtn_Click(object sender, EventArgs e)
+        {
+            var idsToDelete = new List<string>();
+            foreach (DataGridViewRow row in StudentDataGridView.Rows)
+            {
+                // 获取第一列的复选框单元格
+                DataGridViewCheckBoxCell chkCell = row.Cells["colCheck"] as DataGridViewCheckBoxCell;
 
-        private async void StudentQueryBtn_Click(object sender, EventArgs e)
+                // 检查单元格是否有效且被选中 (Value可能为null)
+                if (chkCell?.Value != null && (bool)chkCell.Value == true)
+                {
+                    // 获取该行绑定的数据对象的ID
+                    string studentId = row.Cells["Sid"].Value.ToString();
+                    idsToDelete.Add(studentId);
+                }
+            }
+            if (idsToDelete.Count == 0)
+            {
+                MessageBox.Show("请至少选择一个要删除的行。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            var confirmResult = MessageBox.Show($"您确定要删除选中的 {idsToDelete.Count} 条记录吗？\n此操作不可恢复。",
+                                "确认删除",
+                                MessageBoxButtons.YesNo,
+                                MessageBoxIcon.Warning);
+
+            if (confirmResult == DialogResult.No)
+            {
+                return;
+            }
+            try
+            {
+                foreach (var id in idsToDelete)
+                {
+                    // 调用服务层的删除方法
+                    bool success = await _studentService.DeleteStudentAsync(id);
+                    if (!success)
+                    {
+                        MessageBox.Show($"删除学生ID {id} 失败。", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return; // 如果有任何一条删除失败，则终止操作
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"删除过程中发生错误: {ex.Message}", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+        }
+        private async void StudentQueryBtn_Click(object sender, EventArgs e, ComboBox studentGendercomboBox)
         {
             var criteria = new Student
             {
@@ -75,12 +136,6 @@ namespace WinFormsApp
                 students.ListChanged += Students_ListChanged;
                 // 3. 绑定结果到DataGridView
                 StudentDataGridView.DataSource = students;
-                // 如果需要，可以设置DataGridView的列标题等属性
-                StudentDataGridView.Columns["sid"].HeaderText = "学生ID";
-                StudentDataGridView.Columns["sname"].HeaderText = "学生姓名";
-                StudentDataGridView.Columns["sage"].HeaderText = "出生年月";
-                StudentDataGridView.Columns["ssex"].HeaderText = "性别";
-
                 // (可选) 提示查询结果数量
                 MessageBox.Show($"查询到 {students.Count()} 条记录。", "查询完成");
             }
@@ -89,7 +144,150 @@ namespace WinFormsApp
                 MessageBox.Show($"查询时发生错误: {ex.Message}", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        //  ListChanged 事件的处理程序,监听学生列表的变化
+        private async void UpdateStudentBtn_Click(object sender, EventArgs e)
+        {
+            this.StudentDataGridView.EndEdit();
+            this.Validate();
+
+            // 检查是否有任何需要保存的更改（无论是新增还是修改）
+            if (!newStudents.Any() && !modifiedStudents.Any())
+            {
+                MessageBox.Show("没有检测到任何数据更改。");
+                return;
+            }
+
+            try
+            {
+                // 关键：调用统一的保存方法，将两个集合都传过去
+                bool success = await _studentService.SaveChangesAsync(newStudents, modifiedStudents);
+
+                if (success)
+                {
+                    MessageBox.Show("数据保存成功！", "成功", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    // 操作成功后，清空两个跟踪集合
+                    newStudents.Clear();
+                    modifiedStudents.Clear();
+                    await LoadStudentsAsync();
+                    // （可选但推荐）重新加载数据，以获取新插入记录的自增ID
+                    // await LoadStudentsAsync(); 
+                }
+                else
+                {
+                    MessageBox.Show("保存失败，没有行受到影响或发生未知错误。", "失败", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"保存数据时发生错误: {ex.Message}", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        private void StudentAddBtn_Click(object sender, EventArgs e)
+        {
+
+            using (AddStudentWindow addStudentWindow = new AddStudentWindow(_studentService))
+            {
+                // 显示添加学生信息的窗口
+                DialogResult result = addStudentWindow.ShowDialog();
+            }
+
+        }
+        #endregion
+
+        #region Course控件的事件处理
+        private async void CourseQueryBtn_Click(object sender, EventArgs e)
+        {
+            var criteria = new CourseTeacherView
+            {
+                Cid = CourseIdtextBox.Text.Trim(),
+                Cname = CourseNametextBox.Text.Trim(),
+                Tid = TeacherIdtextBox.Text.Trim(),
+            };
+            try
+            {
+                // 2. 调用服务层的统一查询方法
+                var cos = (await _courseService.SearchCoursesAsync(criteria)).ToList();
+                courses = new BindingList<CourseTeacherView>(cos); // 将 IEnumerable 转换为 IList
+                courses.ListChanged += Courses_ListChanged; // 订阅 ListChanged 事件
+                // 3. 绑定结果到DataGridView
+                CoursedataGridView.DataSource = courses;
+                // 如果需要，可以设置DataGridView的列标题等属性
+                CoursedataGridView.Columns["Cid"].HeaderText = "课程ID";
+                CoursedataGridView.Columns["Cname"].HeaderText = "课程名";
+                CoursedataGridView.Columns["Tid"].HeaderText = "教师ID";
+                CoursedataGridView.Columns["Tname"].HeaderText = "教师名";
+
+                // (可选) 提示查询结果数量
+                MessageBox.Show($"查询到 {courses.Count()} 条记录。", "查询完成");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"查询时发生错误: {ex.Message}", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        private async void CourseAddBtn_Click(object sender, EventArgs e)
+        {
+            using (AddCourseWindow addCourseWindow = new AddCourseWindow(_courseService))
+            {
+                using (var connection = DbConnectionFactory.GetConnection())
+                {
+                    try
+                    {
+                        const string sql = "SELECT CAST(Tid AS NVARCHAR(50)) FROM Teacher;";
+                        var res = await connection.QueryAsync<string>(sql);
+                        addCourseWindow.TeachercomboBox.DataSource = res.ToList(); // 使用实例对象
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"获取教师列表失败: {ex.Message}", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                }
+                // 显示添加课程信息的窗口
+                DialogResult result = addCourseWindow.ShowDialog();
+            }
+        }
+        private async void CourseUpdateBtn_Click(object sender, EventArgs e)
+        {
+            CoursedataGridView.EndEdit();
+            this.Validate();
+
+            // 检查是否有任何需要保存的更改（无论是新增还是修改）
+            if (!newCourses.Any() && !modifiedCourses.Any())
+            {
+                MessageBox.Show("没有检测到任何数据更改。");
+                return;
+            }
+
+            try
+            {
+                // 关键：调用统一的保存方法，将两个集合都传过去
+                bool success = await _courseService.UpdateCourseAsync(newCourses, modifiedCourses);
+
+                if (success)
+                {
+                    MessageBox.Show("课程数据保存成功！", "成功", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    // 操作成功后，清空两个跟踪集合
+                    newCourses.Clear();
+                    modifiedCourses.Clear();
+
+                    // （可选但推荐）重新加载数据，以获取新插入记录的自增ID
+                    // await LoadCoursesAsync();
+                }
+                else
+                {
+                    MessageBox.Show("保存失败，没有行受到影响或发生未知错误。", "失败", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"保存课程数据时发生错误: {ex.Message}", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        #endregion
+
+        #region 监听DataGridView的复选框列
         private void Students_ListChanged(object sender, ListChangedEventArgs e)
         {
             switch (e.ListChangedType)
@@ -138,191 +336,13 @@ namespace WinFormsApp
                     }
             }
         }
-
-        private void StudentDeleteBtn_Click(object sender, EventArgs e)
-        {
-            // 分别是：提示信息、标题、默认值
-            string inputId = Interaction.InputBox("请输入要删除的学生ID：", "删除确认", "");
-            if (!string.IsNullOrEmpty(inputId))
-            {
-                // 在这里执行您的删除逻辑
-                // 为了安全，最好验证一下输入的是否为有效数字
-                if (int.TryParse(inputId, out int idToDelete))
-                {
-                    MessageBox.Show($"准备删除ID为 {idToDelete} 的记录！");
-                    // 在此调用您的删除服务或方法
-                    _studentService.DeleteStudentAsync(inputId);
-                }
-                else
-                {
-                    MessageBox.Show("请输入有效的数字ID。", "输入无效", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
-            }
-            else
-            {
-                MessageBox.Show("操作已取消。");
-            }
-        }
+        #endregion
 
 
-        private async void UpdateStudentBtn_Click(object sender, EventArgs e)
-        {
-            this.StudentDataGridView.EndEdit();
-            this.Validate();
 
-            // 检查是否有任何需要保存的更改（无论是新增还是修改）
-            if (!newStudents.Any() && !modifiedStudents.Any())
-            {
-                MessageBox.Show("没有检测到任何数据更改。");
-                return;
-            }
-
-            try
-            {
-                // 关键：调用统一的保存方法，将两个集合都传过去
-                bool success = await _studentService.SaveChangesAsync(newStudents, modifiedStudents);
-
-                if (success)
-                {
-                    MessageBox.Show("数据保存成功！", "成功", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                    // 操作成功后，清空两个跟踪集合
-                    newStudents.Clear();
-                    modifiedStudents.Clear();
-                    await LoadStudentsAsync();
-                    // （可选但推荐）重新加载数据，以获取新插入记录的自增ID
-                    // await LoadStudentsAsync(); 
-                }
-                else
-                {
-                    MessageBox.Show("保存失败，没有行受到影响或发生未知错误。", "失败", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"保存数据时发生错误: {ex.Message}", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void StudentAddBtn_Click(object sender, EventArgs e)
-        {
-
-            using (AddStudentWindow addStudentWindow = new AddStudentWindow(_studentService))
-            {
-                // 显示添加学生信息的窗口
-                DialogResult result = addStudentWindow.ShowDialog();
-            }
-
-        }
-
-        private void StudentIdTextChanged(object sender, EventArgs e)
-        {
-            //bool hasId = !string.IsNullOrWhiteSpace(StudentIdtextBox.Text);
-            //StudentNametextBox.Enabled = hasId;
-            //StudnetGendertextBox.Enabled = hasId;
-            //StduentBirthdaytextBox.Enabled = hasId;
-            //if (hasId)
-            //{
-            //    StudentNametextBox.Clear();
-            //    StudnetGendertextBox.Clear();
-            //    StduentBirthdaytextBox.Clear(); // 清空选择
-            //}
-
-        }
+ 
 
 
-        private async void CourseQueryBtn_Click(object sender, EventArgs e)
-        {
-            var criteria = new CourseTeacherView
-            {
-                Cid = CourseIdtextBox.Text.Trim(),
-                Cname = CourseNametextBox.Text.Trim(),
-                Tid = TeacherIdtextBox.Text.Trim(),
-            };
-            try
-            {
-                // 2. 调用服务层的统一查询方法
-                var cos = (await _courseService.SearchCoursesAsync(criteria)).ToList();
-                courses = new BindingList<CourseTeacherView>(cos); // 将 IEnumerable 转换为 IList
-                courses.ListChanged += Courses_ListChanged; // 订阅 ListChanged 事件
-                // 3. 绑定结果到DataGridView
-                CoursedataGridView.DataSource = courses;
-                // 如果需要，可以设置DataGridView的列标题等属性
-                CoursedataGridView.Columns["Cid"].HeaderText = "课程ID";
-                CoursedataGridView.Columns["Cname"].HeaderText = "课程名";
-                CoursedataGridView.Columns["Tid"].HeaderText = "教师ID";
-                CoursedataGridView.Columns["Tname"].HeaderText = "教师名";
-
-                // (可选) 提示查询结果数量
-                MessageBox.Show($"查询到 {courses.Count()} 条记录。", "查询完成");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"查询时发生错误: {ex.Message}", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private async void CourseAddBtn_Click(object sender, EventArgs e)
-        {
-            using (AddCourseWindow addCourseWindow = new AddCourseWindow(_courseService))
-            {
-                using (var connection = DbConnectionFactory.GetConnection())
-                {
-                    try
-                    {
-                        const string sql = "SELECT CAST(Tid AS NVARCHAR(50)) FROM Teacher;";
-                        var res = await connection.QueryAsync<string>(sql);
-                        addCourseWindow.TeachercomboBox.DataSource = res.ToList(); // 使用实例对象
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show($"获取教师列表失败: {ex.Message}", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return;
-                    }
-                }
-                // 显示添加课程信息的窗口
-                DialogResult result = addCourseWindow.ShowDialog();
-            }
-        }
-
-        private async void CourseUpdateBtn_Click(object sender, EventArgs e)
-        {
-            CoursedataGridView.EndEdit();
-            this.Validate();
-
-            // 检查是否有任何需要保存的更改（无论是新增还是修改）
-            if (!newCourses.Any() && !modifiedCourses.Any())
-            {
-                MessageBox.Show("没有检测到任何数据更改。");
-                return;
-            }
-
-            try
-            {
-                // 关键：调用统一的保存方法，将两个集合都传过去
-                bool success = await _courseService.UpdateCourseAsync(newCourses, modifiedCourses);
-
-                if (success)
-                {
-                    MessageBox.Show("课程数据保存成功！", "成功", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                    // 操作成功后，清空两个跟踪集合
-                    newCourses.Clear();
-                    modifiedCourses.Clear();
-
-                    // （可选但推荐）重新加载数据，以获取新插入记录的自增ID
-                   // await LoadCoursesAsync();
-                }
-                else
-                {
-                    MessageBox.Show("保存失败，没有行受到影响或发生未知错误。", "失败", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"保存课程数据时发生错误: {ex.Message}", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
 
 
     }
