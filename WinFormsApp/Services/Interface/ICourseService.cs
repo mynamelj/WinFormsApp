@@ -11,5 +11,8 @@ namespace WinFormsApp.Services.Interface
     public interface ICourseService
     {
         Task<IEnumerable<CourseTeacherView>> SearchCoursesAsync(CourseTeacherView criteria);
+
+        // 新增课程
+        Task<bool> InsertCourseAsync(Course course);
     }
 }

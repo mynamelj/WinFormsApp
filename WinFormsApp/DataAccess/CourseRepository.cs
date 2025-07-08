@@ -18,9 +18,21 @@ namespace WinFormsApp.DataAccess
 
     public class CourseRepository : ICourseRepository
     {
-        public Task<bool> InsertAsync(Course course)
+        public async Task<bool> InsertAsync(Course course)
         {
-            
+            using( var connection = DbConnectionFactory.GetConnection())
+            {
+                // 定义插入的SQL语句
+                string sql = "INSERT INTO Course(Cid, Cname, TId) VALUES(@Cid, @Cname, @TId)";
+                
+                // 执行插入操作
+                int rowsAffected = await connection.ExecuteAsync(sql, course);
+                
+                // 如果影响的行数大于0，表示插入成功
+                return rowsAffected > 0;
+            }
+
+
         }
 
         public  async Task<bool> SaveChangesAsync(IEnumerable<CourseTeacherView> coursesToInsert, IEnumerable<CourseTeacherView> coursesToUpdate)

@@ -101,9 +101,9 @@ namespace WinFormsApp.Views
             CourseTeacherlabel.AutoSize = true;
             CourseTeacherlabel.Location = new Point(3, 112);
             CourseTeacherlabel.Name = "CourseTeacherlabel";
-            CourseTeacherlabel.Size = new Size(56, 17);
+            CourseTeacherlabel.Size = new Size(69, 17);
             CourseTeacherlabel.TabIndex = 2;
-            CourseTeacherlabel.Text = "任课老师";
+            CourseTeacherlabel.Text = "任课老师ID";
             // 
             // CourseNameBox
             // 
@@ -131,6 +131,7 @@ namespace WinFormsApp.Views
             Confirm.TabIndex = 0;
             Confirm.Text = "确认";
             Confirm.UseVisualStyleBackColor = true;
+            Confirm.Click += Confirm_Click;
             // 
             // Cancel
             // 
