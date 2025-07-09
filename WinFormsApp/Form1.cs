@@ -24,35 +24,63 @@ namespace WinFormsApp
 
         private readonly IStudentService _studentService;
         private readonly ICourseService _courseService;
+        private readonly ITeacherService _teacherService;
+
         [Required]
-        private BindingList<Student> students=new BindingList<Student>();
-        private BindingList<CourseTeacherView> courses;
+        private BindingList<Student> students = new BindingList<Student>();
+        private BindingList<CourseTeacherView> courses = new BindingList<CourseTeacherView>();
+        private BindingList<Teacher> teachers = new BindingList<Teacher>();
         // 用于跟踪修改的学生
         private HashSet<Student> modifiedStudents = new HashSet<Student>();
-        //检查是否有新学生添加
         private HashSet<Student> newStudents = new HashSet<Student>();
+        private HashSet<Teacher> modifiedTeachers = new HashSet<Teacher>();
+        // 用于跟踪修改的课程
         private HashSet<CourseTeacherView> modifiedCourses = new HashSet<CourseTeacherView>();
         private HashSet<CourseTeacherView> newCourses = new HashSet<CourseTeacherView>();
+        private HashSet<Teacher> newTeachers = new HashSet<Teacher>();
 
         // 让构造函数接收 IStudentService 依赖
-        public Form1(IStudentService studentService, ICourseService courseService)
+        public Form1(IStudentService studentService,
+                     ICourseService courseService,
+                     ITeacherService teacherService)
         {
             InitializeComponent();
             _studentService = studentService; // DI容器会自动提供实例
             _courseService = courseService;
-            StudentGendercomboBox.SelectedIndex = 2;
-            // 默认选择第一个选项
-            var checkColumn = new SelectCheckBoxColumn();
+            _teacherService = teacherService;
+            StudentGendercomboBox.SelectedIndex = 2;// 默认选择第一个选项
+
+            var StucheckColumn = new SelectCheckBoxColumn();
             if (!StudentDataGridView.Columns.Contains("colCheck"))
             {
-                StudentDataGridView.Columns.Insert(0, checkColumn);
+                StudentDataGridView.Columns.Insert(0, StucheckColumn);
             }
             StudentDataGridView.DataSource = students;
-            // 如果需要，可以设置DataGridView的列标题等属性
+            // 可以设置DataGridView的列标题等属性
             StudentDataGridView.Columns["sid"].HeaderText = "学生ID";
             StudentDataGridView.Columns["sname"].HeaderText = "学生姓名";
             StudentDataGridView.Columns["sage"].HeaderText = "出生年月";
             StudentDataGridView.Columns["ssex"].HeaderText = "性别";
+            var CoursecheckColumn = new SelectCheckBoxColumn();
+            if (!CourseDataGridView.Columns.Contains("colCheck"))
+            {
+                CourseDataGridView.Columns.Insert(0, CoursecheckColumn);
+            }
+            CourseDataGridView.DataSource = courses;
+            // 可以设置DataGridView的列标题等属性
+            CourseDataGridView.Columns["Cid"].HeaderText = "课程ID";
+            CourseDataGridView.Columns["Cname"].HeaderText = "课程名";
+            CourseDataGridView.Columns["Tid"].HeaderText = "教师ID";
+            CourseDataGridView.Columns["Tname"].HeaderText = "教师名";
+
+            var TeachercheckColumn = new SelectCheckBoxColumn();
+            if (!TeacherDataGridView.Columns.Contains("colCheck"))
+            {
+                TeacherDataGridView.Columns.Insert(0, TeachercheckColumn);
+            }
+            TeacherDataGridView.DataSource = teachers;
+            TeacherDataGridView.Columns["Tid"].HeaderText = "教师ID";
+            TeacherDataGridView.Columns["Tname"].HeaderText = "教师姓名";
         }
 
 
@@ -116,7 +144,7 @@ namespace WinFormsApp
             }
 
         }
-        private async void StudentQueryBtn_Click(object sender, EventArgs e, ComboBox studentGendercomboBox)
+        private async void StudentQueryBtn_Click(object sender, EventArgs e)
         {
             var criteria = new Student
             {
@@ -210,13 +238,7 @@ namespace WinFormsApp
                 courses = new BindingList<CourseTeacherView>(cos); // 将 IEnumerable 转换为 IList
                 courses.ListChanged += Courses_ListChanged; // 订阅 ListChanged 事件
                 // 3. 绑定结果到DataGridView
-                CoursedataGridView.DataSource = courses;
-                // 如果需要，可以设置DataGridView的列标题等属性
-                CoursedataGridView.Columns["Cid"].HeaderText = "课程ID";
-                CoursedataGridView.Columns["Cname"].HeaderText = "课程名";
-                CoursedataGridView.Columns["Tid"].HeaderText = "教师ID";
-                CoursedataGridView.Columns["Tname"].HeaderText = "教师名";
-
+                CourseDataGridView.DataSource = courses;
                 // (可选) 提示查询结果数量
                 MessageBox.Show($"查询到 {courses.Count()} 条记录。", "查询完成");
             }
@@ -249,7 +271,7 @@ namespace WinFormsApp
         }
         private async void CourseUpdateBtn_Click(object sender, EventArgs e)
         {
-            CoursedataGridView.EndEdit();
+            CourseDataGridView.EndEdit();
             this.Validate();
 
             // 检查是否有任何需要保存的更改（无论是新增还是修改）
@@ -284,6 +306,93 @@ namespace WinFormsApp
             {
                 MessageBox.Show($"保存课程数据时发生错误: {ex.Message}", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private async void CourseDeleteBtn_Click(object sender, EventArgs e)
+        {
+            var idsToDelete = new List<string>();
+            foreach (DataGridViewRow row in CourseDataGridView.Rows)
+            {
+                // 获取第一列的复选框单元格
+                DataGridViewCheckBoxCell chkCell = row.Cells["colCheck"] as DataGridViewCheckBoxCell;
+                // 检查单元格是否有效且被选中 (Value可能为null)
+                if (chkCell?.Value != null && (bool)chkCell.Value == true)
+                {
+                    // 获取该行绑定的数据对象的ID
+                    string courseId = row.Cells["Cid"].Value.ToString();
+                    idsToDelete.Add(courseId);
+                }
+
+            }
+            if (idsToDelete.Count == 0)
+            {
+                MessageBox.Show("请至少选择一个要删除的行。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            var confirmResult = MessageBox.Show($"您确定要删除选中的 {idsToDelete.Count} 条记录吗？\n此操作不可恢复。",
+                                "确认删除",
+                                MessageBoxButtons.YesNo,
+                                MessageBoxIcon.Warning);
+            if (confirmResult == DialogResult.No)
+            {
+                return;
+            }
+            try
+            {
+                foreach (var id in idsToDelete)
+                {
+                    // 调用服务层的删除方法
+                    bool success = await _courseService.DeleteCourseAsync(id);
+                    if (!success)
+                    {
+                        MessageBox.Show($"删除课程ID {id} 失败。", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return; // 如果有任何一条删除失败，则终止操作
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"删除过程中发生错误: {ex.Message}", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+        }
+
+
+        #endregion
+
+        #region Teacher控件的事件处理
+        private void TeacherAddBtn_Click(object sender, EventArgs e)
+        {
+            // 显示添加教师信息的窗口
+            using (AddTeacherWindow addTeacherWindow = new AddTeacherWindow(_teacherService))
+            {
+                DialogResult result = addTeacherWindow.ShowDialog();
+            }
+        }
+
+        private async void TeacherQueryBtn_Click(object sender, EventArgs e)
+        {
+            var criteria = new Teacher
+            {
+                Tid = TidtextBox.Text.Trim(),
+                Tname = TnametextBox.Text.Trim(),
+            };
+            try
+            {
+                // 2. 调用服务层的统一查询方法
+                var teachersList = (await _teacherService.SearchAsync(criteria)).ToList();
+                teachers = new BindingList<Teacher>(teachersList); // 将 IEnumerable 转换为 IList
+                teachers.ListChanged += Teachers_ListChanged; // 订阅 ListChanged 事件
+                // 3. 绑定结果到DataGridView
+                TeacherDataGridView.DataSource = teachers;
+                // (可选) 提示查询结果数量
+                MessageBox.Show($"查询到 {teachers.Count()} 条记录。", "查询完成");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"查询时发生错误: {ex.Message}", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
         }
         #endregion
 
@@ -336,11 +445,29 @@ namespace WinFormsApp
                     }
             }
         }
+
+        private void Teachers_ListChanged(object? sender, ListChangedEventArgs e)
+        {
+            switch (e.ListChangedType)
+            {
+                case ListChangedType.ItemChanged:
+                    {
+                        Teacher changedTeacher = teachers[e.NewIndex];
+                        if (!newTeachers.Contains(changedTeacher))
+                        {
+                            modifiedTeachers.Add(changedTeacher);
+                        }
+                        break;
+                    }
+                case ListChangedType.ItemAdded:
+                    {
+                        Teacher newTeacher = teachers[e.NewIndex];
+                        newTeachers.Add(newTeacher);
+                        break;
+                    }
+            }
+        }
         #endregion
-
-
-
- 
 
 
 

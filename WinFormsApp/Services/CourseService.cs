@@ -22,7 +22,13 @@ namespace WinFormsApp.Services
             _courseRepository = courseRepository;
         }
 
-        public  async Task<bool> InsertCourseAsync(Course course)
+        public async Task<bool> DeleteCourseAsync(string courseId)
+        {
+            
+            return await _courseRepository.DeleteAsync(courseId);
+        }
+
+        public async Task<bool> InsertCourseAsync(Course course)
         {
             // 验证课程对象的三个字段都不为空
             if (course == null || string.IsNullOrWhiteSpace(course.Cid) || string.IsNullOrWhiteSpace(course.Cname) )

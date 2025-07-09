@@ -23,7 +23,8 @@ namespace WinFormsApp
             services.AddTransient<IStudentService, StudentService>();
             services.AddTransient<ICourseService, CourseService>();
             services.AddTransient<ICourseRepository, CourseRepository>();
-
+            services.AddTransient<ITeacherRepository, TeacherRepository>();
+            services.AddTransient<ITeacherService, TeacherService>();
             // 把窗体本身也注册进去，这样DI容器才能创建它
             services.AddTransient<Form1>();
             ServiceProvider serviceProvider = services.BuildServiceProvider();

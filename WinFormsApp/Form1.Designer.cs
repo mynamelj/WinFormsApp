@@ -32,17 +32,17 @@
             MainLayoutPanel = new TableLayoutPanel();
             flowLayoutPanel8 = new FlowLayoutPanel();
             Teacherlabel = new Label();
-            tableLayoutPanel4 = new TableLayoutPanel();
+            TeachertableLayoutPanel = new TableLayoutPanel();
             TeacherIdlabel = new Label();
             TeacherNamelabel = new Label();
             TidtextBox = new TextBox();
             TnametextBox = new TextBox();
             flowLayoutPanel10 = new FlowLayoutPanel();
-            button13 = new Button();
-            button14 = new Button();
-            button15 = new Button();
-            button16 = new Button();
-            TeacherdataGridView = new DataGridView();
+            TeacherAddBtn = new Button();
+            TeacherUpdateBtn = new Button();
+            TeacherDeleteBtn = new Button();
+            TeacherQueryBtn = new Button();
+            TeacherDataGridView = new DataGridView();
             CourseflowLayoutPanel = new FlowLayoutPanel();
             label16 = new Label();
             CourseInputtableLayoutPanel = new TableLayoutPanel();
@@ -57,7 +57,7 @@
             CourseUpdateBtn = new Button();
             CourseDeleteBtn = new Button();
             CourseQueryBtn = new Button();
-            CoursedataGridView = new DataGridView();
+            CourseDataGridView = new DataGridView();
             StudentflowLayoutPanel = new FlowLayoutPanel();
             Tablelabel = new Label();
             Infobox = new TableLayoutPanel();
@@ -146,13 +146,13 @@
             ScoredataGridView = new DataGridView();
             MainLayoutPanel.SuspendLayout();
             flowLayoutPanel8.SuspendLayout();
-            tableLayoutPanel4.SuspendLayout();
+            TeachertableLayoutPanel.SuspendLayout();
             flowLayoutPanel10.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)TeacherdataGridView).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)TeacherDataGridView).BeginInit();
             CourseflowLayoutPanel.SuspendLayout();
             CourseInputtableLayoutPanel.SuspendLayout();
             flowLayoutPanel9.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)CoursedataGridView).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)CourseDataGridView).BeginInit();
             StudentflowLayoutPanel.SuspendLayout();
             Infobox.SuspendLayout();
             flowLayoutPanel1.SuspendLayout();
@@ -195,9 +195,9 @@
             // flowLayoutPanel8
             // 
             flowLayoutPanel8.Controls.Add(Teacherlabel);
-            flowLayoutPanel8.Controls.Add(tableLayoutPanel4);
+            flowLayoutPanel8.Controls.Add(TeachertableLayoutPanel);
             flowLayoutPanel8.Controls.Add(flowLayoutPanel10);
-            flowLayoutPanel8.Controls.Add(TeacherdataGridView);
+            flowLayoutPanel8.Controls.Add(TeacherDataGridView);
             flowLayoutPanel8.Location = new Point(949, 3);
             flowLayoutPanel8.Name = "flowLayoutPanel8";
             flowLayoutPanel8.Size = new Size(467, 417);
@@ -213,26 +213,26 @@
             Teacherlabel.TabIndex = 0;
             Teacherlabel.Text = "教师表";
             // 
-            // tableLayoutPanel4
+            // TeachertableLayoutPanel
             // 
-            tableLayoutPanel4.ColumnCount = 4;
-            tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
-            tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
-            tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
-            tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
-            tableLayoutPanel4.Controls.Add(TeacherIdlabel, 0, 0);
-            tableLayoutPanel4.Controls.Add(TeacherNamelabel, 0, 1);
-            tableLayoutPanel4.Controls.Add(TidtextBox, 1, 0);
-            tableLayoutPanel4.Controls.Add(TnametextBox, 1, 1);
-            tableLayoutPanel4.Location = new Point(3, 40);
-            tableLayoutPanel4.Name = "tableLayoutPanel4";
-            tableLayoutPanel4.RowCount = 4;
-            tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
-            tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
-            tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Percent, 22F));
-            tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
-            tableLayoutPanel4.Size = new Size(464, 112);
-            tableLayoutPanel4.TabIndex = 1;
+            TeachertableLayoutPanel.ColumnCount = 4;
+            TeachertableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
+            TeachertableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
+            TeachertableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
+            TeachertableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
+            TeachertableLayoutPanel.Controls.Add(TeacherIdlabel, 0, 0);
+            TeachertableLayoutPanel.Controls.Add(TeacherNamelabel, 0, 1);
+            TeachertableLayoutPanel.Controls.Add(TidtextBox, 1, 0);
+            TeachertableLayoutPanel.Controls.Add(TnametextBox, 1, 1);
+            TeachertableLayoutPanel.Location = new Point(3, 40);
+            TeachertableLayoutPanel.Name = "TeachertableLayoutPanel";
+            TeachertableLayoutPanel.RowCount = 4;
+            TeachertableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
+            TeachertableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
+            TeachertableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 22F));
+            TeachertableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
+            TeachertableLayoutPanel.Size = new Size(464, 112);
+            TeachertableLayoutPanel.TabIndex = 1;
             // 
             // TeacherIdlabel
             // 
@@ -269,66 +269,68 @@
             // 
             // flowLayoutPanel10
             // 
-            flowLayoutPanel10.Controls.Add(button13);
-            flowLayoutPanel10.Controls.Add(button14);
-            flowLayoutPanel10.Controls.Add(button15);
-            flowLayoutPanel10.Controls.Add(button16);
+            flowLayoutPanel10.Controls.Add(TeacherAddBtn);
+            flowLayoutPanel10.Controls.Add(TeacherUpdateBtn);
+            flowLayoutPanel10.Controls.Add(TeacherDeleteBtn);
+            flowLayoutPanel10.Controls.Add(TeacherQueryBtn);
             flowLayoutPanel10.Location = new Point(3, 158);
             flowLayoutPanel10.Name = "flowLayoutPanel10";
             flowLayoutPanel10.Size = new Size(464, 37);
             flowLayoutPanel10.TabIndex = 2;
             // 
-            // button13
+            // TeacherAddBtn
             // 
-            button13.Location = new Point(3, 3);
-            button13.Name = "button13";
-            button13.Size = new Size(75, 30);
-            button13.TabIndex = 0;
-            button13.Text = "新增";
-            button13.UseVisualStyleBackColor = true;
+            TeacherAddBtn.Location = new Point(3, 3);
+            TeacherAddBtn.Name = "TeacherAddBtn";
+            TeacherAddBtn.Size = new Size(75, 30);
+            TeacherAddBtn.TabIndex = 0;
+            TeacherAddBtn.Text = "新增";
+            TeacherAddBtn.UseVisualStyleBackColor = true;
+            TeacherAddBtn.Click += TeacherAddBtn_Click;
             // 
-            // button14
+            // TeacherUpdateBtn
             // 
-            button14.Location = new Point(84, 3);
-            button14.Name = "button14";
-            button14.Size = new Size(75, 30);
-            button14.TabIndex = 1;
-            button14.Text = "保存更改";
-            button14.UseVisualStyleBackColor = true;
+            TeacherUpdateBtn.Location = new Point(84, 3);
+            TeacherUpdateBtn.Name = "TeacherUpdateBtn";
+            TeacherUpdateBtn.Size = new Size(75, 30);
+            TeacherUpdateBtn.TabIndex = 1;
+            TeacherUpdateBtn.Text = "保存更改";
+            TeacherUpdateBtn.UseVisualStyleBackColor = true;
             // 
-            // button15
+            // TeacherDeleteBtn
             // 
-            button15.Location = new Point(165, 3);
-            button15.Name = "button15";
-            button15.Size = new Size(75, 30);
-            button15.TabIndex = 2;
-            button15.Text = "删除";
-            button15.UseVisualStyleBackColor = true;
+            TeacherDeleteBtn.Location = new Point(165, 3);
+            TeacherDeleteBtn.Name = "TeacherDeleteBtn";
+            TeacherDeleteBtn.Size = new Size(75, 30);
+            TeacherDeleteBtn.TabIndex = 2;
+            TeacherDeleteBtn.Text = "删除";
+            TeacherDeleteBtn.UseVisualStyleBackColor = true;
             // 
-            // button16
+            // TeacherQueryBtn
             // 
-            button16.Location = new Point(343, 3);
-            button16.Margin = new Padding(100, 3, 3, 3);
-            button16.Name = "button16";
-            button16.Size = new Size(75, 30);
-            button16.TabIndex = 3;
-            button16.Text = "查询";
-            button16.UseVisualStyleBackColor = true;
+            TeacherQueryBtn.Location = new Point(343, 3);
+            TeacherQueryBtn.Margin = new Padding(100, 3, 3, 3);
+            TeacherQueryBtn.Name = "TeacherQueryBtn";
+            TeacherQueryBtn.Size = new Size(75, 30);
+            TeacherQueryBtn.TabIndex = 3;
+            TeacherQueryBtn.Text = "查询";
+            TeacherQueryBtn.UseVisualStyleBackColor = true;
+            TeacherQueryBtn.Click += TeacherQueryBtn_Click;
             // 
-            // TeacherdataGridView
+            // TeacherDataGridView
             // 
-            TeacherdataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            TeacherdataGridView.Location = new Point(3, 201);
-            TeacherdataGridView.Name = "TeacherdataGridView";
-            TeacherdataGridView.Size = new Size(464, 216);
-            TeacherdataGridView.TabIndex = 6;
+            TeacherDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            TeacherDataGridView.Location = new Point(3, 201);
+            TeacherDataGridView.Name = "TeacherDataGridView";
+            TeacherDataGridView.Size = new Size(464, 216);
+            TeacherDataGridView.TabIndex = 6;
             // 
             // CourseflowLayoutPanel
             // 
             CourseflowLayoutPanel.Controls.Add(label16);
             CourseflowLayoutPanel.Controls.Add(CourseInputtableLayoutPanel);
             CourseflowLayoutPanel.Controls.Add(flowLayoutPanel9);
-            CourseflowLayoutPanel.Controls.Add(CoursedataGridView);
+            CourseflowLayoutPanel.Controls.Add(CourseDataGridView);
             CourseflowLayoutPanel.Location = new Point(476, 3);
             CourseflowLayoutPanel.Name = "CourseflowLayoutPanel";
             CourseflowLayoutPanel.Size = new Size(467, 417);
@@ -455,6 +457,7 @@
             CourseDeleteBtn.TabIndex = 2;
             CourseDeleteBtn.Text = "删除";
             CourseDeleteBtn.UseVisualStyleBackColor = true;
+            CourseDeleteBtn.Click += CourseDeleteBtn_Click;
             // 
             // CourseQueryBtn
             // 
@@ -467,13 +470,13 @@
             CourseQueryBtn.UseVisualStyleBackColor = true;
             CourseQueryBtn.Click += CourseQueryBtn_Click;
             // 
-            // CoursedataGridView
+            // CourseDataGridView
             // 
-            CoursedataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            CoursedataGridView.Location = new Point(3, 201);
-            CoursedataGridView.Name = "CoursedataGridView";
-            CoursedataGridView.Size = new Size(464, 216);
-            CoursedataGridView.TabIndex = 6;
+            CourseDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            CourseDataGridView.Location = new Point(3, 201);
+            CourseDataGridView.Name = "CourseDataGridView";
+            CourseDataGridView.Size = new Size(464, 216);
+            CourseDataGridView.TabIndex = 6;
             // 
             // StudentflowLayoutPanel
             // 
@@ -640,6 +643,7 @@
             StudentQueryBtn.TabIndex = 3;
             StudentQueryBtn.Text = "查询";
             StudentQueryBtn.UseVisualStyleBackColor = true;
+            StudentQueryBtn.Click += StudentQueryBtn_Click;
             // 
             // StudentDataGridView
             // 
@@ -1341,16 +1345,16 @@
             MainLayoutPanel.ResumeLayout(false);
             flowLayoutPanel8.ResumeLayout(false);
             flowLayoutPanel8.PerformLayout();
-            tableLayoutPanel4.ResumeLayout(false);
-            tableLayoutPanel4.PerformLayout();
+            TeachertableLayoutPanel.ResumeLayout(false);
+            TeachertableLayoutPanel.PerformLayout();
             flowLayoutPanel10.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)TeacherdataGridView).EndInit();
+            ((System.ComponentModel.ISupportInitialize)TeacherDataGridView).EndInit();
             CourseflowLayoutPanel.ResumeLayout(false);
             CourseflowLayoutPanel.PerformLayout();
             CourseInputtableLayoutPanel.ResumeLayout(false);
             CourseInputtableLayoutPanel.PerformLayout();
             flowLayoutPanel9.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)CoursedataGridView).EndInit();
+            ((System.ComponentModel.ISupportInitialize)CourseDataGridView).EndInit();
             StudentflowLayoutPanel.ResumeLayout(false);
             StudentflowLayoutPanel.PerformLayout();
             Infobox.ResumeLayout(false);
@@ -1470,20 +1474,20 @@
         private Button button12;
         private DataGridView dataGridView3;
         public DataGridView StudentDataGridView;
-        private DataGridView CoursedataGridView;
+        private DataGridView CourseDataGridView;
         private FlowLayoutPanel flowLayoutPanel8;
         private Label Teacherlabel;
-        private TableLayoutPanel tableLayoutPanel4;
+        private TableLayoutPanel TeachertableLayoutPanel;
         private Label TeacherIdlabel;
         private Label TeacherNamelabel;
         private TextBox TidtextBox;
         private TextBox TnametextBox;
         private FlowLayoutPanel flowLayoutPanel10;
-        private Button button13;
-        private Button button14;
-        private Button button15;
-        private Button button16;
-        private DataGridView TeacherdataGridView;
+        private Button TeacherAddBtn;
+        private Button TeacherUpdateBtn;
+        private Button TeacherDeleteBtn;
+        private Button TeacherQueryBtn;
+        private DataGridView TeacherDataGridView;
         private FlowLayoutPanel flowLayoutPanel11;
         private FlowLayoutPanel flowLayoutPanel13;
         private TableLayoutPanel tableLayoutPanel5;

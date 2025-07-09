@@ -18,6 +18,21 @@ namespace WinFormsApp.DataAccess
 
     public class CourseRepository : ICourseRepository
     {
+        public Task<bool> DeleteAsync(string courseId)
+        {
+           using (var connection = DbConnectionFactory.GetConnection())
+            {
+                // 定义删除的SQL语句
+                string sql = "DELETE FROM Course WHERE Cid = @Cid";
+                
+                // 执行删除操作
+                int rowsAffected = connection.Execute(sql, new { Cid = courseId });
+                
+                // 如果影响的行数大于0，表示删除成功
+                return Task.FromResult(rowsAffected > 0);
+            }
+        }
+
         public async Task<bool> InsertAsync(Course course)
         {
             using( var connection = DbConnectionFactory.GetConnection())
