@@ -34,9 +34,42 @@ namespace WinFormsApp.DataAccess
             }
         }
 
-        public Task<bool> SaveChangesAsync(IEnumerable<Teacher> studentsToInsert, IEnumerable<Teacher> studentsToUpdate)
+        public async Task<bool> SaveChangesAsync(IEnumerable<Teacher> teachersToInsert, IEnumerable<Teacher> teachersToUpdate)
         {
-            throw new NotImplementedException();
+            using (var connection = DbConnectionFactory.GetConnection())
+            {
+                using (var transaction = connection.BeginTransaction())
+                {
+                    try
+                    {
+                        // 定义插入和更新的SQL语句
+                        string insertSql = "INSERT INTO Teacher(Tid,Tname) VALUES(@Tid,@Tname)";
+                        string updateSql = "UPDATE Teacher SET Tname = @Tname WHERE Tid = @Tid";
+
+                        // 1. 批量执行插入操作
+                        if (teachersToInsert != null && teachersToInsert.Any())
+                        {
+                            await connection.ExecuteAsync(insertSql, teachersToInsert, transaction);
+                        }
+
+                        // 2. 批量执行更新操作
+                        if (teachersToInsert != null && teachersToInsert.Any())
+                        {
+                            await connection.ExecuteAsync(updateSql, teachersToUpdate, transaction);
+                        }
+
+                        // 3. 如果所有操作都成功，提交事务
+                        transaction.Commit();
+                        return true;
+                    }
+                    catch (Exception)
+                    {
+                        // 4. 如果任何一个操作失败，回滚整个事务
+                        transaction.Rollback();
+                        throw; // 向上抛出异常，让上层知道操作失败了
+                    }
+                }
+            }
         }
 
         public async Task<IEnumerable<Teacher>> SearchAsync(Teacher criteria)

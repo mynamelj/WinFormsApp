@@ -26,8 +26,10 @@ namespace WinFormsApp
         private readonly ICourseService _courseService;
         private readonly ITeacherService _teacherService;
 
-        [Required]
+
         private BindingList<Student> students = new BindingList<Student>();
+
+        //private BindingList<Student> students = new BindingList<Student>();
         private BindingList<CourseTeacherView> courses = new BindingList<CourseTeacherView>();
         private BindingList<Teacher> teachers = new BindingList<Teacher>();
         // 用于跟踪修改的学生
@@ -125,24 +127,57 @@ namespace WinFormsApp
             {
                 return;
             }
+
+            // 禁用按钮，防止重复点击
+            StudentDeleteBtn.Enabled = false;
+            this.Cursor = Cursors.WaitCursor;
+
             try
             {
-                foreach (var id in idsToDelete)
+                // 使用CancellationTokenSource设置超时
+                using (var cts = new CancellationTokenSource(TimeSpan.FromSeconds(30)))
                 {
-                    // 调用服务层的删除方法
-                    bool success = await _studentService.DeleteStudentAsync(id);
-                    if (!success)
+                    foreach (var id in idsToDelete)
                     {
-                        MessageBox.Show($"删除学生ID {id} 失败。", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return; // 如果有任何一条删除失败，则终止操作
+                        // 检查是否已取消
+                        cts.Token.ThrowIfCancellationRequested();
+                        
+                        // 调用服务层的删除方法
+                        bool success = await _studentService.DeleteStudentAsync(id).ConfigureAwait(false);
+                        if (!success)
+                        {
+                            // 切换回UI线程显示消息
+                            this.Invoke(() => MessageBox.Show($"删除学生ID {id} 失败。", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error));
+                            return; // 如果有任何一条删除失败，则终止操作
+                        }
                     }
+                    
+                    // 切换回UI线程更新界面
+                    this.Invoke(() => MessageBox.Show("删除操作完成", "成功", MessageBoxButtons.OK, MessageBoxIcon.Information));
                 }
+            }
+            catch (OperationCanceledException)
+            {
+                this.Invoke(() => MessageBox.Show("操作超时，请检查网络连接。", "超时", MessageBoxButtons.OK, MessageBoxIcon.Warning));
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"删除过程中发生错误: {ex.Message}", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                // 检查是否是网络相关异常
+                string errorMessage = ex.Message;
+                if (ex.InnerException != null)
+                    errorMessage += $"\n详细信息: {ex.InnerException.Message}";
+                
+                this.Invoke(() => MessageBox.Show($"删除过程中发生错误: {errorMessage}", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error));
             }
-
+            finally
+            {
+                // 恢复UI状态
+                this.Invoke(() =>
+                {
+                    StudentDeleteBtn.Enabled = true;
+                    this.Cursor = Cursors.Default;
+                });
+            }
         }
         private async void StudentQueryBtn_Click(object sender, EventArgs e)
         {
@@ -257,7 +292,8 @@ namespace WinFormsApp
                     {
                         const string sql = "SELECT CAST(Tid AS NVARCHAR(50)) FROM Teacher;";
                         var res = await connection.QueryAsync<string>(sql);
-                        addCourseWindow.TeachercomboBox.DataSource = res.ToList(); // 使用实例对象
+                        addCourseWindow.TeachercomboBox.DataSource = res.ToList();// 使用实例对象
+
                     }
                     catch (Exception ex)
                     {
@@ -361,6 +397,41 @@ namespace WinFormsApp
         #endregion
 
         #region Teacher控件的事件处理
+
+        private async void TeacherUpdateBtn_Click(object sender, EventArgs e)
+        {
+            TeacherDataGridView.EndEdit();
+            this.Validate();
+            // 检查是否有任何需要保存的更改（无论是新增还是修改）
+            if (!newTeachers.Any() && !modifiedTeachers.Any())
+            {
+                MessageBox.Show("没有检测到任何数据更改。");
+                return;
+            }
+            try
+            {
+                // 关键：调用统一的保存方法，将两个集合都传过去
+                bool success = await  _teacherService.SaveChangesAsync(newTeachers, modifiedTeachers);
+                if (success)
+                {
+                    MessageBox.Show("教师数据保存成功！", "成功", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    // 操作成功后，清空两个跟踪集合
+                    newTeachers.Clear();
+                    modifiedTeachers.Clear();
+                    // （可选但推荐）重新加载数据，以获取新插入记录的自增ID
+                    // await LoadTeachersAsync();
+                }
+                else
+                {
+                    MessageBox.Show("保存失败，没有行受到影响或发生未知错误。", "失败", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"保存教师数据时发生错误: {ex.Message}", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+        }
         private void TeacherAddBtn_Click(object sender, EventArgs e)
         {
             // 显示添加教师信息的窗口
@@ -471,6 +542,11 @@ namespace WinFormsApp
 
 
 
+
+        private void TeacherDeleteBtn_Click(object sender, EventArgs e)
+        {
+
+        }
 
     }
 }

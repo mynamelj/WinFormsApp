@@ -30,7 +30,6 @@ namespace WinFormsApp.DataAccess
         /// <returns>学生列表</returns>
         /// 
 
-
         public async Task<IEnumerable<Student>> GetAllAsync()
         {
             using (var connection = DbConnectionFactory.GetConnection())

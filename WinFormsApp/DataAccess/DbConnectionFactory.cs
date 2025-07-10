@@ -24,7 +24,8 @@ namespace WinFormsApp.DataAccess
         // *******************************************************************
         private const string DatabaseName = "MyData"; // <-- 请确认此数据库名是否正确
 
-        private static readonly string connectionString = $"Server=43.251.101.161;Database={DatabaseName};User ID=sa;Password=Sa123456!;TrustServerCertificate=True;";
+        // 添加连接超时设置（5秒）和命令超时设置
+        private static readonly string connectionString = $"Server=43.251.101.161;Database={DatabaseName};User ID=sa;Password=Sa123456!;TrustServerCertificate=True;Connection Timeout=5;Command Timeout=10;";
 
         /// <summary>
         /// 获取一个新的、打开的数据库连接
@@ -35,6 +36,18 @@ namespace WinFormsApp.DataAccess
             // 使用接口（IDbConnection）而不是具体实现（SqlConnection）是良好实践
             var connection = new SqlConnection(connectionString);
             connection.Open();
+            return connection;
+        }
+
+        /// <summary>
+        /// 异步获取数据库连接，支持取消令牌
+        /// </summary>
+        /// <param name="cancellationToken">取消令牌</param>
+        /// <returns>IDbConnection 接口的实例</returns>
+        public static async Task<IDbConnection> GetConnectionAsync(CancellationToken cancellationToken = default)
+        {
+            var connection = new SqlConnection(connectionString);
+            await connection.OpenAsync(cancellationToken).ConfigureAwait(false);
             return connection;
         }
     }

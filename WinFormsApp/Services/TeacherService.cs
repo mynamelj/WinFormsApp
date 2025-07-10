@@ -28,9 +28,9 @@ namespace WinFormsApp.Services
             
         }
 
-        public Task<bool> SaveChangesAsync(IEnumerable<Teacher> teachersToInsert, IEnumerable<Teacher> teachersToUpdate)
+        public async Task<bool> SaveChangesAsync(IEnumerable<Teacher> teachersToInsert, IEnumerable<Teacher> teachersToUpdate)
         {
-            throw new NotImplementedException();
+            return await _teacherRepository.SaveChangesAsync(teachersToInsert, teachersToUpdate);
         }
 
         public async Task<IEnumerable<Teacher>> SearchAsync(Teacher criteria)

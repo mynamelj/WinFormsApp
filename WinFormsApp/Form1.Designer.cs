@@ -296,6 +296,7 @@
             TeacherUpdateBtn.TabIndex = 1;
             TeacherUpdateBtn.Text = "保存更改";
             TeacherUpdateBtn.UseVisualStyleBackColor = true;
+            TeacherUpdateBtn.Click += TeacherUpdateBtn_Click;
             // 
             // TeacherDeleteBtn
             // 
@@ -305,6 +306,7 @@
             TeacherDeleteBtn.TabIndex = 2;
             TeacherDeleteBtn.Text = "删除";
             TeacherDeleteBtn.UseVisualStyleBackColor = true;
+            TeacherDeleteBtn.Click += TeacherDeleteBtn_Click;
             // 
             // TeacherQueryBtn
             // 

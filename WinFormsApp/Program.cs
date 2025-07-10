@@ -17,8 +17,8 @@ namespace WinFormsApp
 
             var services = new ServiceCollection();
 
-            // 在这里注册你的服务和依赖
-            // 我们使用 AddTransient，表示每次请求时都创建一个新的实例
+            // 在这里注册服务和依赖
+            // 使用 AddTransient，表示每次请求时都创建一个新的实例
             services.AddTransient<IStudentRepository, StudentRepository>();
             services.AddTransient<IStudentService, StudentService>();
             services.AddTransient<ICourseService, CourseService>();
